@@ -1,0 +1,9 @@
+const String kPassNullError = "Please Enter your password";
+const String kShortPassError = "Password is too short";
+const String kMatchPassError = "Passwords don't match";
+const String kUsernamelNullError = "Username must be more than 8 characters";
+const String kPhoneNumberNullError = "Phone Number must be Valid";
+const String kfirstNameNullError = "First Name must be Valid";
+const String kMiddleNameNullError = "Middle Name must be Valid";
+const String kLastNameNullError = "Last Name must be Valid";
+const String kUsernameNullError = "Username must be Valid";
