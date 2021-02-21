@@ -2,9 +2,7 @@ name: money_app
 description: A new Flutter application about Numbers importance
 
 # The following line prevents the package from being accidentally published to
-# pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
-
+# pub.dev using `pub
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -28,6 +26,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   country_code_picker: ^1.7.0
+  page_transition: ^1.1.7+6
+  provider: ^4.3.3
+  get_it: ^5.0.6
+  fluttertoast: ^7.1.8
+  http: ^0.12.2
+  #modal_bottom_sheet: 1.0.0+1
 
 dev_dependencies:
   flutter_test:

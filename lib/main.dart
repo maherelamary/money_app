@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/config/locator.dart';
 import 'package:money_app/routes.dart';
-import 'package:money_app/screens/splash/splash_screen.dart';
-import 'package:money_app/screens/home_page/home_screen.dart';
+import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
+import 'package:money_app/ui/screens/splash/splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  setupLocator();
   //Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -25,8 +28,34 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: routes,
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case '/sign_up':
+            return PageTransition(
+              child: SignUpScreen(),
+              type: PageTransitionType.rightToLeftWithFade,
+              settings: settings,
+              reverseDuration: Duration(seconds: 2500),
+              duration: Duration(seconds: 2500),
+              curve: Curves.linearToEaseOut,
+            );
+            break;
+          case '/otp':
+            return PageTransition(
+              child: SignUpScreen(),
+              type: PageTransitionType.rightToLeftWithFade,
+              settings: settings,
+              reverseDuration: Duration(milliseconds: 2500),
+              duration: Duration(milliseconds: 2500),
+              curve: Curves.linearToEaseOut,
+            );
+            break;
+          default:
+            return null;
+        }
+      },
     );
   }
 }

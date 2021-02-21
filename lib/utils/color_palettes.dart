@@ -13,8 +13,15 @@ class ColorPalettes {
   //Some Static For style
   static TextStyle bodyTextStyle =
       TextStyle(color: Colors.black45, fontSize: 15.0);
+
   static TextStyle headerTextStyle = TextStyle(
     color: primaryColor,
+    fontSize: 36.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle lightHeaderTextStyle = TextStyle(
+    color: primaryColor.withOpacity(.3),
     fontSize: 36.0,
     fontWeight: FontWeight.bold,
   );
