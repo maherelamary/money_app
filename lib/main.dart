@@ -9,7 +9,7 @@ import 'package:page_transition/page_transition.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  Firebase.initializeApp();
+  //Firebase.initializeApp();
   runApp(MyApp());
 }
 
