@@ -17,14 +17,26 @@ class User {
     this.password,
     this.confirmPassword,
   });
-  User.fromApi(Map<String, dynamic> json) {
-    this.displayName = json['displayName'];
-    this.firstName = json['firstName'];
-    this.middleName = json['middleName'];
-    this.lastName = json['lastName'];
-    this.mobile = json['mobile'];
-    this.mobileCountryCode = json['mobileCountryCode'];
-    this.confirmPassword = json['confirmPassword'];
-    this.password = json['password'];
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      displayName: json['displayName'] as String,
+      firstName: json['firstName'] as String,
+      middleName: json['middleName'] as String,
+      lastName: json['lastName'] as String,
+      mobile: json['mobile'] as String,
+      mobileCountryCode: json['mobileCountryCode'] as String,
+      password: json['password'] as String,
+      confirmPassword: json['confirmPassword'] as String,
+    );
   }
+  Map<String, dynamic> toJson() => {
+        "displayName": displayName,
+        "firstName": firstName,
+        "middleName": middleName,
+        "lastName": lastName,
+        "mobile": mobile,
+        "mobileCountryCode": mobileCountryCode,
+        "password": password,
+        "confirmPassword": confirmPassword,
+      };
 }

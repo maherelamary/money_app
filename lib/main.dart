@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:money_app/config/locator.dart';
+import 'package:money_app/locator.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/ui/screens/splash/splash_screen.dart';
@@ -8,7 +9,7 @@ import 'package:page_transition/page_transition.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  //Firebase.initializeApp();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
