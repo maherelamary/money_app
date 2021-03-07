@@ -18,12 +18,12 @@ class SendMessageContainer extends StatefulWidget {
 class _SendMessageContainerState extends State<SendMessageContainer> {
   String _message;
   final _messageController = TextEditingController();
-  VendorChatProvider vendorChatProvider = VendorChatProvider();
+  ChatModel chatModel = ChatModel();
 
   void _sendMessage() {
     widget.onSubmit(_message);
     ChatMessage msg = _createMessageFromText(_message);
-    vendorChatProvider.pushMessageToDatabase(
+    chatModel.pushMessageToDatabase(
       msg,
     );
     _message = '';
@@ -34,13 +34,15 @@ class _SendMessageContainerState extends State<SendMessageContainer> {
   ChatMessage _createMessageFromText(String textMessage) {
     return ChatMessage(
       message: textMessage,
+      author: 'Maher',
+      authorId: '13',
       timeStamp: DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    vendorChatProvider = Provider.of<VendorChatProvider>(context);
+    chatModel = Provider.of<ChatModel>(context);
 
     return Container(
       child: Row(

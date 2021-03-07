@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:money_app/UI/widgets/buttons/sign_in_button.dart';
 import 'package:money_app/UI/widgets/error_container.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
+import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
@@ -25,7 +25,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String surname;
   String countryCode;
   String country;
-  bool remember = false;
+  //bool remember = false;
   final List<String> errors = [];
 
   void addError({String error}) {
@@ -138,31 +138,31 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(
               height: 15.0,
             ),
-            Container(
-              height: 40.0,
-              child: Row(
-                children: [
-                  Checkbox(
-                    value: remember,
-                    activeColor: ColorPalettes.primaryColor,
-                    onChanged: (isRemembered) {
-                      setState(
-                        () {
-                          remember = isRemembered;
-                        },
-                      );
-                    },
-                  ),
-                  Text(
-                    "Remember me",
-                    style: ColorPalettes.bodyTextStyle,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
+            // Container(
+            //   height: 40.0,
+            //   child: Row(
+            //     children: [
+            //       Checkbox(
+            //         value: remember,
+            //         activeColor: ColorPalettes.primaryColor,
+            //         onChanged: (isRemembered) {
+            //           setState(
+            //             () {
+            //               remember = isRemembered;
+            //             },
+            //           );
+            //         },
+            //       ),
+            //       Text(
+            //         "Remember me",
+            //         style: ColorPalettes.bodyTextStyle,
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 8.0,
+            // ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15.0),
               child: FormErrorAlert(
@@ -176,10 +176,22 @@ class _SignUpFormState extends State<SignUpForm> {
               onTap: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
+                  Map registeredData = {
+                    "displayName": username,
+                    "firstName": firstName,
+                    "middleName": middleName,
+                    "lastName": surname,
+                    "mobile": phone,
+                    "mobileCountryCode": countryCode,
+                    "password": password,
+                    "confirmPassword": conformPass,
+                  };
                   Navigator.pushNamed(context, OtpScreen.routeName);
                 }
               },
-              child: signInButton(title: "Send Code"),
+              child: AnimatedButton(
+                title: "Send Code",
+              ),
             ),
             SizedBox(
               height: 15.0,

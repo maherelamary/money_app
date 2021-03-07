@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
 
-Widget signUpButton() => Container(
+class CustomButton extends StatelessWidget {
+  final String title;
+  const CustomButton({Key key, this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       width: 250,
       height: 50,
       margin: EdgeInsets.symmetric(horizontal: 15.0),
@@ -21,7 +27,9 @@ Widget signUpButton() => Container(
         ),
       ),
       child: Text(
-        'Sign Up',
+        title,
         style: TextStyle(fontSize: 18.0, color: Colors.white),
       ),
     );
+  }
+}

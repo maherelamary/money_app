@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
-import 'package:money_app/ui/screens/chat_screen/components/message_wall.dart';
-import 'package:money_app/ui/screens/chat_screen/components/send_message.dart';
+import 'package:money_app/ui/screens/chat/components/message_wall.dart';
+import 'package:money_app/ui/screens/chat/components/send_message.dart';
+
 import 'package:provider/provider.dart';
 
-class VendorChatScreen extends StatefulWidget {
+class ChatScreen extends StatefulWidget {
+  static String routeName = "/chat";
   @override
-  _VendorChatScreenState createState() => _VendorChatScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _VendorChatScreenState extends State<VendorChatScreen> {
-  VendorChatProvider vendorChatProvider = VendorChatProvider();
+class _ChatScreenState extends State<ChatScreen> {
+  ChatModel chatModel = ChatModel();
 
   final List<ChatMessage> chatList = [];
   void initState() {
     // TODO: implement initState
-    Future.delayed(Duration(milliseconds: 1), () {
-      vendorChatProvider.getVendorUserChatList();
-    });
+    // Future.delayed(Duration(milliseconds: 1), () {
+    //   chatModel.getVendorUserChatList();
+    // });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    vendorChatProvider = Provider.of<VendorChatProvider>(context);
+    chatModel = Provider.of<ChatModel>(context);
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade100,
       appBar: AppBar(
-        title: Text('Chat Screen'),
-        centerTitle: true,
-        elevation: 2.0,
+        title: Text(
+          'Chat Screen',
+          style: TextStyle(
+            color: Colors.black87,
+          ),
+        ),
       ),
       body: Column(
         children: [

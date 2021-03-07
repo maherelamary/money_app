@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/utils/color_palettes.dart';
 
 class HomeHeader extends StatefulWidget {
@@ -30,12 +31,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        "https://picsum.photos/250?image=9",
-                      ),
-                      radius: 50.0,
-                    ),
+                    ProfileAvatar(),
                     SizedBox(
                       height: 10.0,
                     ),

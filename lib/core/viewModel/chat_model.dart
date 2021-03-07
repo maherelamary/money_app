@@ -13,7 +13,7 @@ class ChatMessage {
     this.authorId,
     this.message,
     this.timeStamp,
-    this.imageUrl = "https://placeholder.it/100x100",
+    this.imageUrl = "https://picsum.photos/250?image=9",
     this.isVendor = 'true',
   });
 
@@ -35,43 +35,14 @@ class ChatMessage {
       };
 }
 
-class VendorChatProvider extends ChangeNotifier {
-  List<ChatMessage> chatsList = [];
-  // bool _loadingChats = false;
-  // bool get loadingChats => _loadingChats;
-
-  final ref = FirebaseDatabase.instance.reference().child('vendor_user_chat');
-
-  Future<List<ChatMessage>> getVendorUserChatList() async {
-    chatsList = [];
-    print("getVendorUserChatList()");
-    DataSnapshot snap =
-        await ref.child("currentQuestion").child("player").once();
-    if (snap.value != null) {
-      Map<dynamic, dynamic> values = snap.value;
-      values.forEach((_, query) {
-        var _message = ChatMessage.fromSnapshot(query);
-        chatsList.add(_message);
-      });
-      chatsList
-        ..sort((a, b) => DateTime.parse(replaceFarsiNumber(
-                b.timeStamp.toString().replaceAll("ص", "").replaceAll("م", "")))
-            .compareTo(DateTime.parse(replaceFarsiNumber(a.timeStamp
-                .toString()
-                .replaceAll("ص", "")
-                .replaceAll("م", "")))));
-
-      return chatsList;
-    } else {
-      return <ChatMessage>[];
-    }
-  }
+class ChatModel extends ChangeNotifier {
+  final ref = FirebaseDatabase.instance.reference().child('CHATTING');
 
   void pushMessageToDatabase(
     ChatMessage msg,
   ) {
     var key = ref.push().key;
-    ref.child("Current Question").child("playerId").child(key).set(msg.toMap());
+    ref.child("13").child(key).set(msg.toMap());
     notifyListeners();
   }
 

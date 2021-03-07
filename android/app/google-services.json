@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "934131317669",
+    "firebase_url": "https://money-app-d491e-default-rtdb.firebaseio.com",
+    "project_id": "money-app-d491e",
+    "storage_bucket": "money-app-d491e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934131317669:android:308547a138100e661bc64c",
+        "android_client_info": {
+          "package_name": "com.hash.money_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934131317669-dcqq7dkdo7cg9rl5gshs7hr506eog8c6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hash.money_app",
+            "certificate_hash": "5cb30a55838e45d828befd222339881a18027b02"
+          }
+        },
+        {
+          "client_id": "934131317669-ofru2q8a19mn9qmla620fj8l40ahggio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFr8dvpJtHH-7H6F66mLwp8XTzKGF0h_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934131317669-ofru2q8a19mn9qmla620fj8l40ahggio.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "934131317669-nusq4gmhcv9vkt363m1hr25en78ne8pe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hash.money-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

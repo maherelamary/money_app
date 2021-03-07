@@ -15,6 +15,14 @@ class MyMessage extends StatefulWidget {
 }
 
 class _MyMessageState extends State<MyMessage> {
+  List<Color> _colors = [
+    Color(0xffead2d4),
+    Color(0xffe5c8cb),
+    Color(0xffffafbd),
+    Color(0xffffd3b5),
+    Color(0xffeab9d2),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,15 +68,37 @@ class _MyMessageState extends State<MyMessage> {
             width: 5.0,
           ),
           widget.showAvatar
-              ? CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    widget.message.imageUrl,
-                  ),
-                )
+              // ? CircleAvatar(
+              //     backgroundImage: NetworkImage(
+              //       widget.message.imageUrl,
+              //     ),
+              //   )
+              ? _buildCustomAvatar()
               : SizedBox(
-                  width: 40.0,
+                  width: 60.0,
                 ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCustomAvatar() {
+    return Container(
+      width: 60.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(30),
+          topLeft: Radius.circular(30),
+        ),
+        color: (_colors..shuffle()).first,
+      ),
+      child: Center(
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(
+            widget.message.imageUrl,
+          ),
+        ),
       ),
     );
   }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:money_app/UI/screens/sign_up/otp_screen.dart';
 import 'package:money_app/UI/screens/sign_up/sign_up_screen.dart';
-import 'package:money_app/UI/widgets/buttons/sign_in_button.dart';
-import 'package:money_app/UI/widgets/buttons/sign_up_button.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
+import 'package:money_app/ui/widgets/buttons/animated_button.dart';
+import 'package:money_app/ui/widgets/buttons/custom_button.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
 
@@ -18,7 +18,7 @@ class _SignInFormState extends State<SignInForm> {
   String countryCode;
   String phoneNumber;
   String password;
-  bool remember = false;
+  bool _remember = false;
   bool _clicked = false;
   final List<String> errors = [];
 
@@ -95,12 +95,12 @@ class _SignInFormState extends State<SignInForm> {
                   ),
                   Container(
                     child: Checkbox(
-                      value: remember,
+                      value: _remember,
                       activeColor: ColorPalettes.primaryColor,
                       onChanged: (isRemembered) {
                         setState(
                           () {
-                            remember = isRemembered;
+                            _remember = isRemembered;
                           },
                         );
                       },
@@ -115,14 +115,12 @@ class _SignInFormState extends State<SignInForm> {
             ],
           ),
           Spacer(),
-          InkWell(
-            onTap: () {
-              setState(() {
-                _clicked = !_clicked;
-                Navigator.pushNamed(context, OtpScreen.routeName);
-              });
+          AnimatedButton(
+            title: "Sign in",
+            onComplete: () {
+              print("onComplete Fired");
+              Navigator.pushNamed(context, OtpScreen.routeName);
             },
-            child: signInButton(isClicked: _clicked),
           ),
           SizedBox(
             height: 10.0,
@@ -131,7 +129,9 @@ class _SignInFormState extends State<SignInForm> {
             onTap: () {
               return Navigator.pushNamed(context, SignUpScreen.routeName);
             },
-            child: signUpButton(),
+            child: CustomButton(
+              title: 'Sign Up',
+            ),
           ),
           SizedBox(
             height: 20.0,

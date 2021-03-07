@@ -1,4 +1,4 @@
-package com.maherelamary.money_app
+package com.hash.money_app
 
 import io.flutter.embedding.android.FlutterActivity
 

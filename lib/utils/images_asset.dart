@@ -6,4 +6,5 @@ class ImagesAsset {
   static String cardIdIcon = "assets/img/id-card.png";
   static String background = "assets/img/background.jpeg";
   static String logo = "assets/img/logo.png";
+  static String profile = "assets/img/profile.png";
 }
