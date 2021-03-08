@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/UI/widgets/error_container.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
+import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
-import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
-
+import 'package:provider/provider.dart';
 import '../otp_screen.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
@@ -24,9 +24,10 @@ class _SignUpFormState extends State<SignUpForm> {
   String middleName;
   String surname;
   String countryCode;
-  String country;
   //bool remember = false;
   final List<String> errors = [];
+
+  SignUpModel signUpModel = SignUpModel();
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -44,6 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    signUpModel = Provider.of<SignUpModel>(context);
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -81,7 +83,6 @@ class _SignUpFormState extends State<SignUpForm> {
                     },
                     onChanged: (code) {
                       countryCode = code.dialCode.toString();
-                      country = code.name.toString();
                     },
                   ),
                 ),
@@ -173,24 +174,26 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 15.0,
             ),
             InkWell(
-              onTap: () {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
-                  Map registeredData = {
-                    "displayName": username,
-                    "firstName": firstName,
-                    "middleName": middleName,
-                    "lastName": surname,
-                    "mobile": phone,
-                    "mobileCountryCode": countryCode,
-                    "password": password,
-                    "confirmPassword": conformPass,
-                  };
-                  Navigator.pushNamed(context, OtpScreen.routeName);
-                }
-              },
+              onTap: () {},
               child: AnimatedButton(
                 title: "Send Code",
+                onComplete: () {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    Map registeredData = {
+                      "displayName": username,
+                      "firstName": firstName,
+                      "middleName": middleName,
+                      "lastName": surname,
+                      "mobile": phone,
+                      "mobileCountryCode": countryCode,
+                      "password": password,
+                      "confirmPassword": conformPass,
+                    };
+                    signUpModel.registerMobile(registerData: registeredData);
+                    //Navigator.pushNamed(context, OtpScreen.routeName);
+                  }
+                },
               ),
             ),
             SizedBox(

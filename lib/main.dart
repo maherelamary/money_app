@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:money_app/core/model/notification.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
+import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/chat/chat_screen.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
@@ -35,6 +36,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<SignUpModel>(
+          create: (context) => SignUpModel(),
+        ),
         ChangeNotifierProvider<ChatModel>(
           create: (context) => ChatModel(),
         ),
@@ -88,6 +92,8 @@ class _MyAppState extends State<MyApp> {
   void registerNotification() async {
     AppNotification _notificationInfo;
 
+    await Firebase.initializeApp();
+
     await _messaging.requestNotificationPermissions(
       IosNotificationSettings(
         alert: true,
@@ -111,14 +117,14 @@ class _MyAppState extends State<MyApp> {
       },
       onBackgroundMessage: _firebaseMessagingBackgroundHandler,
       onLaunch: (message) async {
-        print("message recieved");
+        print("message recieved on Launch");
         AppNotification notification = AppNotification.fromJson(message);
         setState(() {
           _notificationInfo = notification;
         });
       },
       onResume: (message) async {
-        print("message recieved");
+        print("message recieved on Resume");
         AppNotification notification = AppNotification.fromJson(message);
         setState(() {
           _notificationInfo = notification;
