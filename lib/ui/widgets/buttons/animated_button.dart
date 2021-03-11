@@ -3,10 +3,12 @@ import 'package:money_app/utils/color_palettes.dart';
 
 class AnimatedButton extends StatefulWidget {
   String title;
+  bool isLoading;
   Function onComplete;
   AnimatedButton({
     Key key,
     this.title,
+    this.isLoading = false,
     this.onComplete,
   }) : super(key: key);
 
@@ -18,7 +20,6 @@ class _AnimatedButtonState extends State<AnimatedButton>
     with TickerProviderStateMixin {
   AnimationController _controller;
   Animation<double> _containerWidth;
-  bool _clicked = false;
   @override
   void initState() {
     super.initState();
@@ -44,20 +45,22 @@ class _AnimatedButtonState extends State<AnimatedButton>
       builder: (context, _) {
         return InkWell(
           onTap: () {
-            _clicked = true;
-            _controller.forward();
+            //TODO
+            if (widget?.isLoading == false) {
+              _controller.forward();
+            }
           },
           child: Container(
             height: 50.0,
-            width: _clicked ? _containerWidth.value : 250,
+            width: widget?.isLoading ? _containerWidth.value : 250,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: ColorPalettes.secondaryColor,
               borderRadius: BorderRadius.all(
-                Radius.circular(_clicked ? 30 : 50),
+                Radius.circular(widget?.isLoading ? 30 : 50),
               ),
             ),
-            child: !_clicked
+            child: !widget?.isLoading
                 ? Text(
                     widget.title,
                     style: TextStyle(fontSize: 18.0, color: Colors.white),

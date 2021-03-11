@@ -1,19 +1,35 @@
-import 'package:http/http.dart' as request;
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:money_app/core/api_config.dart';
 
 class AuthenticationServices {
-  Future registermobile(Map body) async {
-    final String registerMobile = '/api/v1/identity/RegisterMobile';
-    final String url = ApiConfig.baseApiUrl + registerMobile;
-    print('Url => $url');
-    var response = await request.post(
-      url,
+  static String registerMobile = 'v1/identity/RegisterMobile';
+  static String loginMobile = 'v1/identity/login';
+  static String registerMobileEndpoint = ApiConfig.baseApiUrl + registerMobile;
+  static String loginMobileEndpoint = ApiConfig.baseApiUrl + loginMobile;
+
+  Future<http.Response> registerWithMobile(Map<String, dynamic> body) async {
+    print('Url => $registerMobileEndpoint');
+    return await http.post(
+      registerMobileEndpoint,
       headers: {
+        //'authorization': auth,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
-      body: body,
+      body: jsonEncode(body),
     );
-    return response;
+  }
+
+  Future<http.Response> loginWithMobile(Map<String, dynamic> body) async {
+    print('Url => $loginMobileEndpoint');
+    return await http.post(
+      loginMobileEndpoint,
+      headers: {
+        //'authorization': auth,
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body),
+    );
   }
 }

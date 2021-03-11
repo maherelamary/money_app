@@ -6,7 +6,6 @@ import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
 import 'package:provider/provider.dart';
-import '../otp_screen.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -16,14 +15,15 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  String password;
-  String conformPass;
-  String phone;
-  String username;
-  String firstName;
-  String middleName;
-  String surname;
-  String countryCode;
+  String password = "";
+  String conformPass = "";
+  String phone = "";
+  String username = "";
+  String firstName = "";
+  String middleName = "";
+  String surname = "";
+  String countryCode = "";
+  bool _loading = false;
   //bool remember = false;
   final List<String> errors = [];
 
@@ -174,21 +174,31 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 15.0,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                setState(() {
+                  _loading = true;
+                });
+              },
               child: AnimatedButton(
                 title: "Send Code",
+                isLoading: _loading,
                 onComplete: () {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
-                    Map registeredData = {
-                      "displayName": username,
-                      "firstName": firstName,
-                      "middleName": middleName,
-                      "lastName": surname,
-                      "mobile": phone,
-                      "mobileCountryCode": countryCode,
-                      "password": password,
-                      "confirmPassword": conformPass,
+                  if (!_formKey.currentState.validate()) {
+                    print('onComplete');
+                    //_formKey.currentState.save();
+                    Map<String, dynamic> registeredData = {
+                      "firstName": "maher",
+                      "middleName": "ahmad",
+                      "lastName": "elamary",
+                      "gender": 0,
+                      "country": "string",
+                      "countryCode": "20",
+                      "city": "string",
+                      "mobile": "01287693196",
+                      "mobileCountryCode": "string",
+                      "displayName": "string",
+                      "password": "Code#1997",
+                      "confirmPassword": "Code#1997"
                     };
                     signUpModel.registerMobile(registerData: registeredData);
                     //Navigator.pushNamed(context, OtpScreen.routeName);

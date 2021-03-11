@@ -3,10 +3,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:money_app/core/model/notification.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/routes.dart';
-import 'package:money_app/ui/screens/chat/chat_screen.dart';
-import 'package:money_app/ui/screens/home/home_screen.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -38,6 +37,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider<SignUpModel>(
           create: (context) => SignUpModel(),
+        ),
+        ChangeNotifierProvider<LoginModel>(
+          create: (context) => LoginModel(),
         ),
         ChangeNotifierProvider<ChatModel>(
           create: (context) => ChatModel(),

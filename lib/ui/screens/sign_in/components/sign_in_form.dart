@@ -3,10 +3,15 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:money_app/UI/screens/sign_up/otp_screen.dart';
 import 'package:money_app/UI/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
+import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/ui/widgets/buttons/custom_button.dart';
+import 'package:money_app/ui/widgets/error_container.dart';
 import 'package:money_app/utils/color_palettes.dart';
+import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
+import 'package:provider/provider.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -17,10 +22,15 @@ class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   String countryCode;
   String phoneNumber;
+  String reformattedCode;
+  TextEditingController phoneNumberController = TextEditingController();
   String password;
+  TextEditingController passwordController = TextEditingController();
   bool _remember = false;
   bool _clicked = false;
+  bool _loading = false;
   final List<String> errors = [];
+  LoginModel loginModel = LoginModel();
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -38,6 +48,7 @@ class _SignInFormState extends State<SignInForm> {
 
   @override
   Widget build(BuildContext context) {
+    loginModel = Provider.of<LoginModel>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -66,7 +77,10 @@ class _SignInFormState extends State<SignInForm> {
                         );
                       },
                       onChanged: (code) {
+                        print(code);
+                        reformattedCode = replaceCharAt(code.toString(), 0, "");
                         countryCode = code.toString();
+                        print(reformattedCode);
                       },
                     ),
                   ),
@@ -88,39 +102,71 @@ class _SignInFormState extends State<SignInForm> {
                   )
                 ],
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 65,
-                  ),
-                  Container(
-                    child: Checkbox(
-                      value: _remember,
-                      activeColor: ColorPalettes.primaryColor,
-                      onChanged: (isRemembered) {
-                        setState(
-                          () {
-                            _remember = isRemembered;
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  Text(
-                    "Remember me",
-                    style: ColorPalettes.bodyTextStyle,
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     SizedBox(
+              //       width: 65,
+              //     ),
+              //     Container(
+              //       child: Checkbox(
+              //         value: _remember,
+              //         activeColor: ColorPalettes.primaryColor,
+              //         onChanged: (isRemembered) {
+              //           setState(
+              //             () {
+              //               _remember = isRemembered;
+              //             },
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //     Text(
+              //       "Remember me",
+              //       style: ColorPalettes.bodyTextStyle,
+              //     ),
+              //   ],
+              // ),
             ],
           ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15.0),
+            child: FormErrorAlert(
+              errors: errors,
+            ),
+          ),
           Spacer(),
-          AnimatedButton(
-            title: "Sign in",
-            onComplete: () {
-              print("onComplete Fired");
-              Navigator.pushNamed(context, OtpScreen.routeName);
+          InkWell(
+            onTap: () {
+              setState(() {
+                _loading = true;
+              });
             },
+            child: AnimatedButton(
+              title: "Sign in",
+              //TODO Loading
+              isLoading: _loading,
+              onComplete: () {
+                if (_formKey.currentState.validate()) {
+                  print('onComplete');
+                  //_formKey.currentState.save();
+                  Map<String, dynamic> registeredData = {
+                    "userName": "2001287693196",
+                    "password": "Code#1997",
+                    "isMobile": true
+                  };
+                  print(countryCode);
+                  print(phoneNumber);
+                  print(password);
+                  //loginModel.registerMobile(registerData: registeredData);
+                  //Navigator.pushNamed(context, OtpScreen.routeName);
+                }
+                print("onComplete Fired");
+                //Navigator.pushNamed(context, OtpScreen.routeName);
+              },
+            ),
           ),
           SizedBox(
             height: 10.0,
@@ -141,6 +187,12 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
+  String replaceCharAt(String oldString, int index, String newChar) {
+    return oldString.substring(0, index) +
+        newChar +
+        oldString.substring(index + 1);
+  }
+
   Widget _buildPhoneFormField() => Container(
         child: TextFormField(
           keyboardType: TextInputType.phone,
@@ -148,7 +200,18 @@ class _SignInFormState extends State<SignInForm> {
             phoneNumber = value;
           },
           onChanged: (value) {
+            print(value);
+            if (value.length >= 2) {
+              removeError(error: kPhoneNumberNullError);
+            }
             phoneNumber = value;
+          },
+          validator: (value) {
+            if (value.isEmpty) {
+              addError(error: kPhoneNumberNullError);
+              return "";
+            }
+            return null;
           },
           decoration: loginInputDecoration(
               labelText: "Phone",
@@ -164,7 +227,17 @@ class _SignInFormState extends State<SignInForm> {
           password = value;
         },
         onChanged: (value) {
+          if (value.length >= 2) {
+            removeError(error: kPassNullError);
+          }
           password = value;
+        },
+        validator: (value) {
+          if (value.isEmpty) {
+            addError(error: kPassNullError);
+            return "";
+          }
+          return null;
         },
         decoration: loginInputDecoration(
             labelText: "Password",
