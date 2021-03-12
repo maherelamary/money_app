@@ -22,13 +22,12 @@ class _SignInFormState extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
   String countryCode;
   String phoneNumber;
-  String reformattedCode;
+  //String reformattedCode;
   TextEditingController phoneNumberController = TextEditingController();
   String password;
   TextEditingController passwordController = TextEditingController();
   bool _remember = false;
   bool _clicked = false;
-  bool _loading = false;
   final List<String> errors = [];
   LoginModel loginModel = LoginModel();
 
@@ -78,9 +77,9 @@ class _SignInFormState extends State<SignInForm> {
                       },
                       onChanged: (code) {
                         print(code);
-                        reformattedCode = replaceCharAt(code.toString(), 0, "");
+                        //reformattedCode = replaceCharAt(code.toString(), 0, "");
                         countryCode = code.toString();
-                        print(reformattedCode);
+                        //print(reformattedCode);
                       },
                     ),
                   ),
@@ -140,30 +139,38 @@ class _SignInFormState extends State<SignInForm> {
           Spacer(),
           InkWell(
             onTap: () {
-              setState(() {
-                _loading = true;
-              });
+              if (_formKey.currentState.validate() && !_clicked) {
+                setState(() {
+                  _clicked = true;
+                });
+              } else {
+                print('form not valid');
+              }
             },
             child: AnimatedButton(
               title: "Sign in",
               //TODO Loading
-              isLoading: _loading,
+              clicked: _clicked,
+              serverLoader: loginModel.loading,
               onComplete: () {
-                if (_formKey.currentState.validate()) {
-                  print('onComplete');
-                  //_formKey.currentState.save();
-                  Map<String, dynamic> registeredData = {
-                    "userName": "2001287693196",
-                    "password": "Code#1997",
-                    "isMobile": true
-                  };
-                  print(countryCode);
-                  print(phoneNumber);
-                  print(password);
-                  //loginModel.registerMobile(registerData: registeredData);
-                  //Navigator.pushNamed(context, OtpScreen.routeName);
-                }
+                print('onComplete');
+
+                Map<String, dynamic> registeredData = {
+                  "userName": '${countryCode}${phoneNumber}',
+                  "password": password,
+                  "isMobile": true
+                };
+                loginModel.loginWithMobile(registerData: registeredData);
+                print(countryCode + phoneNumber);
+                print(phoneNumber);
+                print(password);
+                //loginModel.registerMobile(registerData: registeredData);
+                //Navigator.pushNamed(context, OtpScreen.routeName);
                 print("onComplete Fired");
+                setState(() {
+                  _clicked = false;
+                });
+
                 //Navigator.pushNamed(context, OtpScreen.routeName);
               },
             ),

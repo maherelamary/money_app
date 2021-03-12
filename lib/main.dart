@@ -6,8 +6,10 @@ import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/routes.dart';
+import 'package:money_app/ui/screens/home/home_screen.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
+import 'package:money_app/ui/screens/splash/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,8 @@ void main() {
   Firebase.initializeApp();
   runApp(MyApp());
 }
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
   @override
@@ -59,7 +63,8 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: SignInScreen.routeName,
+        navigatorKey: navigatorKey,
+        initialRoute: SplashScreen.routeName,
         routes: routes,
         onGenerateRoute: (settings) {
           switch (settings.name) {
@@ -68,9 +73,9 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(seconds: 2500),
-                duration: Duration(seconds: 2500),
-                curve: Curves.linearToEaseOut,
+                reverseDuration: Duration(seconds: 1000),
+                duration: Duration(seconds: 1000),
+                curve: Curves.fastOutSlowIn,
               );
               break;
             case '/otp':
@@ -78,9 +83,19 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 2500),
-                duration: Duration(milliseconds: 2500),
-                curve: Curves.linearToEaseOut,
+                reverseDuration: Duration(milliseconds: 1000),
+                duration: Duration(milliseconds: 1000),
+                curve: Curves.fastOutSlowIn,
+              );
+              break;
+            case '/home':
+              return PageTransition(
+                child: HomeScreen(),
+                type: PageTransitionType.rightToLeftWithFade,
+                settings: settings,
+                reverseDuration: Duration(milliseconds: 1200),
+                duration: Duration(milliseconds: 1200),
+                curve: Curves.easeInOutCubic,
               );
               break;
             default:

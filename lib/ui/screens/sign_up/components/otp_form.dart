@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/UI/widgets/otp_input_decoration.dart';
+import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
+import 'package:provider/provider.dart';
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
@@ -18,7 +21,14 @@ class _OtpFormState extends State<OtpForm> {
   FocusNode pin4FocusNode;
   FocusNode pin5FocusNode;
   FocusNode pin6FocusNode;
-
+  String otpCode;
+  String number1;
+  String number2;
+  String number3;
+  String number4;
+  String number5;
+  String number6;
+  SignUpModel signUpModel = SignUpModel();
   @override
   void initState() {
     super.initState();
@@ -47,6 +57,7 @@ class _OtpFormState extends State<OtpForm> {
 
   @override
   Widget build(BuildContext context) {
+    signUpModel = Provider.of<SignUpModel>(context);
     return Form(
       child: Column(
         children: [
@@ -65,6 +76,7 @@ class _OtpFormState extends State<OtpForm> {
                   textAlign: TextAlign.center,
                   decoration: otpInputDecoration,
                   onChanged: (value) {
+                    number1 = value;
                     nextField(value, pin2FocusNode);
                   },
                 ),
@@ -84,7 +96,10 @@ class _OtpFormState extends State<OtpForm> {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
-                    onChanged: (value) => nextField(value, pin3FocusNode),
+                    onChanged: (value) {
+                      number2 = value;
+                      nextField(value, pin3FocusNode);
+                    },
                   ),
                 ),
               ),
@@ -103,7 +118,10 @@ class _OtpFormState extends State<OtpForm> {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
-                    onChanged: (value) => nextField(value, pin4FocusNode),
+                    onChanged: (value) {
+                      number3 = value;
+                      nextField(value, pin4FocusNode);
+                    },
                   ),
                 ),
               ),
@@ -122,7 +140,10 @@ class _OtpFormState extends State<OtpForm> {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
-                    onChanged: (value) => nextField(value, pin5FocusNode),
+                    onChanged: (value) {
+                      number4 = value;
+                      nextField(value, pin5FocusNode);
+                    },
                     // Then you need to check is the code is correct or not
                   ),
                 ),
@@ -142,7 +163,10 @@ class _OtpFormState extends State<OtpForm> {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     decoration: otpInputDecoration,
-                    onChanged: (value) => nextField(value, pin6FocusNode),
+                    onChanged: (value) {
+                      number5 = value;
+                      nextField(value, pin6FocusNode);
+                    },
                   ),
                 ),
               ),
@@ -163,6 +187,7 @@ class _OtpFormState extends State<OtpForm> {
                     decoration: otpInputDecoration,
                     onChanged: (value) {
                       if (value.length == 1) {
+                        number6 = value;
                         pin6FocusNode.unfocus();
                       }
                       // Then you need to check is the code is correct or not
@@ -175,47 +200,82 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(
             height: Sizes.dp30(context) * 4,
           ),
-          Container(
-            height: 60.0,
-            width: 160.0,
-            padding: EdgeInsets.all(10.0),
-            decoration: ShapeDecoration(
-              color: ColorPalettes.primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(new Radius.circular(40.0)),
-                side: BorderSide(width: 1.0, color: ColorPalettes.lightColor),
+          InkWell(
+            onTap: () {
+              if (number1 != null &&
+                  number2 != null &&
+                  number3 != null &&
+                  number4 != null &&
+                  number5 != null &&
+                  number6 != null) {
+                otpCode =
+                    number1 + number2 + number3 + number4 + number5 + number6;
+                print(otpCode);
+
+                if (signUpModel.getOTP()) {
+                  if (otpCode == signUpModel.getProfile().otp) {
+                    print("Verified");
+                    Map<String, dynamic> registeredData = {
+                      "code": signUpModel.getProfile().otp,
+                      "mobile": signUpModel.getProfile().mobileCountryCode +
+                          signUpModel.getProfile().mobile
+                    };
+                    signUpModel.verifyUserMobile(registerData: registeredData);
+                  } else {
+                    Fluttertoast.showToast(
+                      msg: 'Please, Type a valid verification code',
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.CENTER,
+                      backgroundColor: Colors.pink.shade400,
+                      textColor: Colors.white,
+                      fontSize: 15.0,
+                    );
+                  }
+                }
+              }
+            },
+            child: Container(
+              height: 60.0,
+              width: 160.0,
+              padding: EdgeInsets.all(10.0),
+              decoration: ShapeDecoration(
+                color: ColorPalettes.primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(new Radius.circular(40.0)),
+                  side: BorderSide(width: 1.0, color: ColorPalettes.lightColor),
+                ),
+                // side: new BorderSide(color: Colors.white)
               ),
-              // side: new BorderSide(color: Colors.white)
-            ),
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Confirm",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Confirm",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 16.0,
-                  ),
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: ColorPalettes.lightColor.withOpacity(0.3),
+                    SizedBox(
+                      width: 16.0,
                     ),
-                    child: Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white70,
-                      size: 25.0,
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: ColorPalettes.lightColor.withOpacity(0.3),
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white70,
+                        size: 25.0,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

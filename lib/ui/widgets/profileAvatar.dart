@@ -61,7 +61,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
 
   Widget _imageSelectorBottomSheet() {
     return Container(
-      height: 120.0,
+      height: 150.0,
       width: Sizes.width(context),
       margin: EdgeInsets.only(
         left: 25.0,
@@ -114,6 +114,9 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
           ],
         ),
       ),
@@ -127,8 +130,8 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
   }) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: 24.0,
-        vertical: 10.0,
+        horizontal: 20.0,
+        vertical: 8.0,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,

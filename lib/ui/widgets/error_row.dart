@@ -20,6 +20,9 @@ Row buildErrorRow({String err}) => Row(
             fontSize: 12.0,
             color: Colors.red,
           ),
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:money_app/UI/widgets/error_container.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
 import 'package:money_app/core/viewModel/sign_up_model.dart';
+import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
@@ -23,7 +24,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String middleName = "";
   String surname = "";
   String countryCode = "";
-  bool _loading = false;
+  bool clicked = false;
   //bool remember = false;
   final List<String> errors = [];
 
@@ -175,34 +176,39 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             InkWell(
               onTap: () {
-                setState(() {
-                  _loading = true;
-                });
+                if (_formKey.currentState.validate() && !clicked) {
+                  setState(() {
+                    clicked = true;
+                  });
+                } else {
+                  print('form not valid');
+                }
               },
               child: AnimatedButton(
                 title: "Send Code",
-                isLoading: _loading,
+                clicked: clicked,
+                serverLoader: signUpModel.loading,
                 onComplete: () {
-                  if (!_formKey.currentState.validate()) {
-                    print('onComplete');
-                    //_formKey.currentState.save();
-                    Map<String, dynamic> registeredData = {
-                      "firstName": "maher",
-                      "middleName": "ahmad",
-                      "lastName": "elamary",
-                      "gender": 0,
-                      "country": "string",
-                      "countryCode": "20",
-                      "city": "string",
-                      "mobile": "01287693196",
-                      "mobileCountryCode": "string",
-                      "displayName": "string",
-                      "password": "Code#1997",
-                      "confirmPassword": "Code#1997"
-                    };
-                    signUpModel.registerMobile(registerData: registeredData);
-                    //Navigator.pushNamed(context, OtpScreen.routeName);
+                  print('onComplete');
+                  Map<String, dynamic> registeredData = {
+                    "firstName": firstName,
+                    "middleName": middleName,
+                    "lastName": surname,
+                    "mobile": phone,
+                    "mobileCountryCode": countryCode,
+                    "displayName": username,
+                    "password": password,
+                    "confirmPassword": conformPass,
+                  };
+                  signUpModel.registerMobile(registerData: registeredData);
+                  setState(() {
+                    clicked = false;
+                  });
+                  if (signUpModel.getProfile() != null) {
+                    Navigator.pushNamed(context, OtpScreen.routeName);
                   }
+
+                  //Navigator.pushNamed(context, OtpScreen.routeName);
                 },
               ),
             ),
@@ -219,13 +225,13 @@ class _SignUpFormState extends State<SignUpForm> {
         keyboardType: TextInputType.name,
         onSaved: (newValue) => username = newValue,
         onChanged: (value) {
-          if (value.length >= 8) {
+          if (value.length >= 6) {
             removeError(error: kUsernameNullError);
           }
           username = value;
         },
         validator: (value) {
-          if (value.length < 8) {
+          if (value.length < 6) {
             addError(error: kUsernameNullError);
             return "";
           }
@@ -272,7 +278,7 @@ class _SignUpFormState extends State<SignUpForm> {
           } else if (value.length >= 8) {
             removeError(error: kShortPassError);
           } else if (RegExp(
-                  r"(?=.*[0-9])(?=.*[A-Za-z])(?=.*[~!?@#$%^&*_-])[A-Za-z0-9~!?@#$%^&*_-]{8,40}$")
+                  r"^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$")
               .hasMatch(value)) {
             removeError(error: kDefinePassword);
           }
@@ -286,7 +292,7 @@ class _SignUpFormState extends State<SignUpForm> {
             addError(error: kShortPassError);
             return "";
           } else if (RegExp(
-                  r"(?=.*[0-9])(?=.*[A-Za-z])(?=.*[~!?@#$%^&*_-])[A-Za-z0-9~!?@#$%^&*_-]{8,40}$")
+                  r"^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}$")
               .hasMatch(value)) {
             addError(error: kDefinePassword);
             return "";
