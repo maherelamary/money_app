@@ -1,0 +1,138 @@
+{
+    "greeting": "Welcome",
+    "@greeting": {
+    "description": "App Greeting"
+    },
+
+    "loginBodyText": "The evidence that numbers are treasure",
+    "@loginBodyText": {
+    "description": "Login page header"
+    },
+
+    "login": "Log in",
+    "@login": {
+    "description": "Logging button"
+    },
+
+    "signUp": "Create new account",
+    "@signUp": {
+    "description": "Sign up button"
+    },
+
+    "phoneLabel": "Mobile",
+    "@phoneLabel": {
+    "description": "Sign in form phone label"
+    },
+
+    "phoneHint": "Type your phone number",
+    "@phoneHint": {
+    "description": "Sign in form phone hint"
+    },
+
+    "passwordLabel": "Password",
+    "@password": {
+    "description": "Sign in form password label"
+    },
+
+    "passwordHint": "Type a strong password",
+    "@passwordHint": {
+    "description": "Sign in form password hint"
+    },
+    
+     "conformPasswordLabel": "Conform Password",
+    "@conformPasswordLabel": {
+    "description": "Sign in form conform password label"
+    },
+
+    "conformpasswordHint": "re-type your password",
+    "@conformpasswordHint": {
+    "description": "Sign in form conform password hint"
+    },
+
+     "signUpBodyText": "Please, fill the required data below correctly, this process will help us to contact with you",
+    "@signUpBodyText": {
+    "description": "label"
+    },
+
+    "usernameLabel": "Username",
+    "@usernameLabel": {
+    "description": "Sign up form username label"
+    }, 
+
+    "usernameHint": "Available for all users",
+    "@usernameHint": {
+    "description": "Sign up form username hint"
+    },
+
+    "firstnameLabel": "First Name",
+    "@firstnameLabel": {
+    "description": "Sign up form firstname label"
+    },
+
+    "firstnameHint": "First Name",
+    "@firstnameHint": {
+    "description": "Sign up form firstname hint"
+    },
+
+    "middleNameLabel": "Middle",
+    "@middleNameLabel": {
+    "description": "Sign up form middleName label"
+    },
+
+    "middleNameHint": "Type your middle name",
+    "@middleNameHint": {
+    "description": "Sign up form middleName label"
+    },
+
+     "lastNameLabel": "Surname",
+    "@lastNameLabel": {
+    "description": "Sign up form lastName label"
+    },
+
+    "lastNameHint": "Type your last name",
+    "@lastNameHint": {
+    "description": "Sign up form lastName label"
+    },
+
+
+    "sendCodeLabel": "Send Code",
+    "@sendCodeLabel": {
+    "description": "label"
+    },
+
+    "sendCodeButtonLabel": "Didn't receive code, send again",
+    "@sendCodeButtonLabel": {
+    "description": "label"
+    },
+
+    "confirmLabel": "Confirm",
+    "@confirmLabel": {
+    "description": "label"
+    },
+
+    "pointsLabel": "Points",
+    "@pointsLabel": {
+    "description": "label"
+    },
+
+    "timerLabel": "Timer",
+    "@timerLabel": {
+    "description": "label"
+    },
+
+    "cameraButton": "Take selfie",
+    "@cameraButton": {
+    "description": "label"
+    },
+
+    "galleryButton": "Pick from gallery",
+    "@galleryButton": {
+    "description": "label"
+    },
+
+    "currentQuestionLabel": "Current Question",
+    "@currentQuestion": {
+    "description": "label"
+    }
+
+}

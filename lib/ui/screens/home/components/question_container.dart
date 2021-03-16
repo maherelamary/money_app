@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class QuestionContainer extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _QuestionContainerState extends State<QuestionContainer> {
             Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Current Question',
+                AppLocalizations.of(context).currentQuestionLabel,
                 style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,

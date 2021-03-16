@@ -5,6 +5,7 @@ import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class OtpForm extends StatefulWidget {
   const OtpForm({
@@ -251,7 +252,7 @@ class _OtpFormState extends State<OtpForm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Confirm",
+                      AppLocalizations.of(context).confirmLabel,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
@@ -283,7 +284,7 @@ class _OtpFormState extends State<OtpForm> {
             height: 15.0,
           ),
           Text(
-            'resent OTP code',
+            AppLocalizations.of(context).sendCodeButtonLabel,
             style: TextStyle(
               decoration: TextDecoration.underline,
               color: ColorPalettes.secondaryColor,

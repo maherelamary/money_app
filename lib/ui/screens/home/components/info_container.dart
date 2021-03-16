@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
-
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 class InfoContainer extends StatefulWidget {
   InfoContainer({Key key}) : super(key: key);
 
@@ -36,7 +36,7 @@ class _InfoContainerState extends State<InfoContainer> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Text(
-                    "Points",
+                    AppLocalizations.of(context).pointsLabel,
                     style: TextStyle(
                       fontSize: 13.0,
                       fontWeight: FontWeight.w300,
@@ -64,7 +64,7 @@ class _InfoContainerState extends State<InfoContainer> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Text(
-                    "Timer",
+                    AppLocalizations.of(context).timerLabel,
                     style: TextStyle(
                       fontSize: 13.0,
                       fontWeight: FontWeight.w300,

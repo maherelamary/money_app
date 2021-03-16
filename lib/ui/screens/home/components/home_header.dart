@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class HomeHeader extends StatefulWidget {
   HomeHeader({Key key}) : super(key: key);

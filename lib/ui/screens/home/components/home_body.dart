@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
-
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import 'answer_container.dart';
 import 'question_container.dart';
 

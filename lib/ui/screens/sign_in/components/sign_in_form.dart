@@ -12,6 +12,7 @@ import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class SignInForm extends StatefulWidget {
   @override
@@ -148,8 +149,7 @@ class _SignInFormState extends State<SignInForm> {
               }
             },
             child: AnimatedButton(
-              title: "Sign in",
-              //TODO Loading
+              title: AppLocalizations.of(context).login,
               clicked: _clicked,
               serverLoader: loginModel.loading,
               onComplete: () {
@@ -183,7 +183,7 @@ class _SignInFormState extends State<SignInForm> {
               return Navigator.pushNamed(context, SignUpScreen.routeName);
             },
             child: CustomButton(
-              title: 'Sign Up',
+              title: AppLocalizations.of(context).signUp,
             ),
           ),
           SizedBox(

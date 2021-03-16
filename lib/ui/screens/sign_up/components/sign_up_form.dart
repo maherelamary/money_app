@@ -8,6 +8,7 @@ import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
 import 'package:provider/provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -140,31 +141,6 @@ class _SignUpFormState extends State<SignUpForm> {
             SizedBox(
               height: 15.0,
             ),
-            // Container(
-            //   height: 40.0,
-            //   child: Row(
-            //     children: [
-            //       Checkbox(
-            //         value: remember,
-            //         activeColor: ColorPalettes.primaryColor,
-            //         onChanged: (isRemembered) {
-            //           setState(
-            //             () {
-            //               remember = isRemembered;
-            //             },
-            //           );
-            //         },
-            //       ),
-            //       Text(
-            //         "Remember me",
-            //         style: ColorPalettes.bodyTextStyle,
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 8.0,
-            // ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 15.0),
               child: FormErrorAlert(
@@ -185,7 +161,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
               },
               child: AnimatedButton(
-                title: "Send Code",
+                title: AppLocalizations.of(context).sendCodeLabel,
                 clicked: clicked,
                 serverLoader: signUpModel.loading,
                 onComplete: () {
@@ -262,8 +238,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-          labelText: "Phone",
-          hintText: "Enter phone number",
+          labelText: AppLocalizations.of(context).phoneLabel,
+          hintText: AppLocalizations.of(context).phoneHint,
           isAlwaysBehavior: true,
           suffixIcon: ImagesAsset.phoneIcon,
         ),
@@ -300,8 +276,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-            labelText: "Password",
-            hintText: "Enter your Password",
+            labelText: AppLocalizations.of(context).passwordLabel,
+            hintText: AppLocalizations.of(context).passwordHint,
             isAlwaysBehavior: true,
             suffixIcon: ImagesAsset.passwordIcon),
       );
@@ -328,8 +304,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-            labelText: "Conform",
-            hintText: "Re-enter your password",
+            labelText: AppLocalizations.of(context).conformPasswordLabel,
+            hintText: AppLocalizations.of(context).conformpasswordHint,
             isAlwaysBehavior: true,
             suffixIcon: ImagesAsset.passwordIcon),
       );
@@ -350,8 +326,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-          labelText: "First",
-          hintText: "Enter first name",
+          labelText: AppLocalizations.of(context).firstnameLabel,
+          hintText: AppLocalizations.of(context).firstnameHint,
           isAlwaysBehavior: true,
           suffixIcon: ImagesAsset.cardIdIcon,
         ),
@@ -374,8 +350,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-          labelText: "Middle",
-          hintText: "Enter middle name",
+          labelText: AppLocalizations.of(context).middleNameLabel,
+          hintText: AppLocalizations.of(context).middleNameHint,
           isAlwaysBehavior: true,
           suffixIcon: ImagesAsset.cardIdIcon,
         ),
@@ -398,8 +374,8 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-          labelText: "Surname",
-          hintText: "Enter surname".toUpperCase(),
+          labelText: AppLocalizations.of(context).lastNameLabel,
+          hintText: AppLocalizations.of(context).lastNameHint,
           isAlwaysBehavior: true,
           suffixIcon: ImagesAsset.cardIdIcon,
         ),

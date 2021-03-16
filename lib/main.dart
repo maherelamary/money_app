@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:money_app/core/model/notification.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/core/viewModel/sign_up_model.dart';
+import 'package:money_app/l10n/l10n.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
@@ -12,6 +14,7 @@ import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/ui/screens/splash/splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,15 +57,23 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-              color: Colors.white70,
-              elevation: 1.0,
-              centerTitle: true,
-              brightness: Brightness.light,
-              shadowColor: Colors.pink),
+            color: Colors.white70,
+            elevation: 1.0,
+            centerTitle: true,
+            brightness: Brightness.light,
+            shadowColor: Colors.pink,
+          ),
           primarySwatch: Colors.pink,
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        supportedLocales: L10n.all,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         navigatorKey: navigatorKey,
         initialRoute: SplashScreen.routeName,
         routes: routes,
@@ -106,6 +117,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
+  //Down below related to FCM service
   void registerNotification() async {
     AppNotification _notificationInfo;
 

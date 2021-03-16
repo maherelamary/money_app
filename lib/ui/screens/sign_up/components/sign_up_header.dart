@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
-
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 class BuildSignUpHeader extends StatelessWidget {
   const BuildSignUpHeader({
     Key key,
@@ -15,15 +15,11 @@ class BuildSignUpHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-            'Join Our Team',
-            style: ColorPalettes.headerTextStyle,
-          ),
           SizedBox(
             height: 4.0,
           ),
           Text(
-            'You should fill the required info below correctly. ',
+            AppLocalizations.of(context).signUpBodyText,
             style: ColorPalettes.bodyTextStyle,
             textAlign: TextAlign.center,
           ),
