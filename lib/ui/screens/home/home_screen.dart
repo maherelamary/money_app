@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+
 import 'components/home_body.dart';
 import 'components/home_header.dart';
 import 'components/info_container.dart';

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:money_app/UI/screens/sign_up/components/otp_form.dart';
 import 'package:money_app/UI/widgets/otp_timer.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class OtpScreen extends StatefulWidget {
   static String routeName = "/otp";
@@ -18,11 +19,10 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   bool showNotification = true;
-  SignUpModel signUpModel = SignUpModel();
+  LoginModel loginModel = LoginModel();
 
   @override
   void initState() {
-    
     super.initState();
     //Warm up local_notification
     initializeNotification();
@@ -30,8 +30,8 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    signUpModel = Provider.of<SignUpModel>(context);
-    if (showNotification && signUpModel.getOTP()) {
+    loginModel = Provider.of<LoginModel>(context);
+    if (showNotification && loginModel.getOTP()) {
       print('Otp notifications');
       Future.delayed(Duration.zero, () {
         showNotificationWithSound();
@@ -54,11 +54,11 @@ class _OtpScreenState extends State<OtpScreen> {
                     height: Sizes.dp30(context) * 4,
                   ),
                   Text(
-                    "OTP Verification",
+                    AppLocalizations.of(context).otpHeader,
                     style: ColorPalettes.lightHeaderTextStyle,
                   ),
                   Text(
-                    "We sent your code to ",
+                    AppLocalizations.of(context).otpGuideText,
                     style: ColorPalettes.bodyTextStyle,
                   ),
                   buildTimer(),
@@ -119,7 +119,7 @@ class _OtpScreenState extends State<OtpScreen> {
     await flutterLocalNotificationsPlugin.show(
       0,
       'Your verification Code',
-      signUpModel.getProfile().otp,
+      loginModel.getProfile.otp,
       platformChannelSpecifics,
       payload: 'OTP-Code',
     );

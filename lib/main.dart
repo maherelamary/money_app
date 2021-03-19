@@ -5,13 +5,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:money_app/core/model/notification.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/l10n/l10n.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/ui/screens/splash/splash_screen.dart';
+import 'package:money_app/ui/screens/winner/winner_screen.dart';
+import 'package:money_app/utils/color_palettes.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -42,9 +43,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SignUpModel>(
-          create: (context) => SignUpModel(),
-        ),
         ChangeNotifierProvider<LoginModel>(
           create: (context) => LoginModel(),
         ),
@@ -57,10 +55,10 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-            color: Colors.white70,
-            elevation: 1.0,
+            // color: Colors.white70,
+            color: ColorPalettes.secondaryColor,
+            elevation: 2.0,
             centerTitle: true,
-            brightness: Brightness.light,
             shadowColor: Colors.pink,
           ),
           primarySwatch: Colors.pink,
@@ -84,8 +82,8 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(seconds: 1000),
-                duration: Duration(seconds: 1000),
+                reverseDuration: Duration(seconds: 5),
+                duration: Duration(seconds: 5),
                 curve: Curves.fastOutSlowIn,
               );
               break;
@@ -94,8 +92,8 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 1000),
-                duration: Duration(milliseconds: 1000),
+                reverseDuration: Duration(seconds: 5),
+                duration: Duration(seconds: 5),
                 curve: Curves.fastOutSlowIn,
               );
               break;
@@ -104,11 +102,22 @@ class _MyAppState extends State<MyApp> {
                 child: HomeScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 1200),
-                duration: Duration(milliseconds: 1200),
+                reverseDuration: Duration(milliseconds: 1500),
+                duration: Duration(milliseconds: 1500),
                 curve: Curves.easeInOutCubic,
               );
               break;
+            case '/winner':
+              return PageTransition(
+                child: WinnerScreen(),
+                type: PageTransitionType.bottomToTop,
+                settings: settings,
+                reverseDuration: Duration(milliseconds: 1000),
+                duration: Duration(milliseconds: 1000),
+                curve: Curves.fastOutSlowIn,
+              );
+              break;
+
             default:
               return null;
           }

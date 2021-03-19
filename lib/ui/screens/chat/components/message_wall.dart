@@ -87,16 +87,6 @@ class _MessageWallState extends State<MessageWall> {
               SizedBox(
                 height: 20.0,
               ),
-              Text(
-                "Current Question",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
               Expanded(
                 child: ListView.builder(
                     shrinkWrap: true,

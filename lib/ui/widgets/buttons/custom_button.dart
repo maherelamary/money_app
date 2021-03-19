@@ -28,7 +28,8 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(fontSize: 18.0, color: Colors.white),
+        style:
+            TextStyle(fontSize: 18.0, color: Colors.white, fontFamily: 'Cairo'),
       ),
     );
   }

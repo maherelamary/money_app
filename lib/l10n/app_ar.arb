@@ -1,6 +1,6 @@
 {
     "greeting": "مرحباً",
-    "loginBodyText": "الدليل ان الارقام كنز",
+    "loginBodyText": "الدليل ان الارقام لا زالت كنز",
     "login": "تسجيل الدخول",
     "signUp": "أنشاء حـساب",
     "phoneLabel": "الهاتف",
@@ -20,11 +20,14 @@
     "lastNameHint": "ادخل اسمك الاخير",
     "sendCodeLabel": "ارسل الرمز",
     "sendCodeButtonLabel": "لم اتلقي رسالة. اعد الارسال",
+    "otpHeader": "تحقق الرمز",
+    "otpGuideText": "لقد ارسالنا الرمز الي هذا الرقم",
     "confirmLabel": "تأكيد",
     "pointsLabel": "النقاط",
     "timerLabel": "عداد",
     "cameraButton": "الكاميرة",
     "galleryButton": "اختر من معرض الصور",
-    "currentQuestionLabel": "السؤال الحالي"
+    "currentQuestionLabel": "السؤال الحالي",
+    "postAnswerLabel": "ارسل اجاباتك"
 
 }

@@ -27,12 +27,12 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     chatModel = Provider.of<ChatModel>(context);
     return Scaffold(
-      backgroundColor: Colors.blueGrey.shade100,
+      backgroundColor: Colors.blueGrey.shade50,
       appBar: AppBar(
         title: Text(
-          'Chat Screen',
+          'Chatting',
           style: TextStyle(
-            color: Colors.black87,
+            color: Colors.white24,
           ),
         ),
       ),

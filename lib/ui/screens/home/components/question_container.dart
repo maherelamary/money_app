@@ -21,25 +21,28 @@ class _QuestionContainerState extends State<QuestionContainer> {
             crossAxisAlignment: CrossAxisAlignment.center, */
           children: [
             Container(
-              alignment: Alignment.centerLeft,
+              //alignment: Alignment.centerLeft,
               child: Text(
                 AppLocalizations.of(context).currentQuestionLabel,
                 style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
+                    fontFamily: 'Cairo',
                     fontWeight: FontWeight.w400,
-                    color: ColorPalettes.thirdColor),
+                    color: ColorPalettes.lightColor),
               ),
             ),
             SizedBox(
-              height: 8.0,
+              height: 4.0,
             ),
             Text(
               "What's Your first second middle last sur Name ?",
               textAlign: TextAlign.left,
               softWrap: true,
               style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Cairo',
+                color: Colors.black87,
               ),
             ),
             SizedBox(
@@ -94,7 +97,8 @@ class _QuestionContainerState extends State<QuestionContainer> {
                         controller: null,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          hintText: 'Publish answer ...',
+                          hintText:
+                              AppLocalizations.of(context).postAnswerLabel,
                           hintStyle: TextStyle(fontSize: 16),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.only(
@@ -116,12 +120,13 @@ class _QuestionContainerState extends State<QuestionContainer> {
                       ),
                     ),
                     IconButton(
-                        color: ColorPalettes.thirdColor,
-                        icon: Icon(
-                          Icons.send_outlined,
-                          size: 20,
-                        ),
-                        onPressed: null)
+                      color: ColorPalettes.thirdColor,
+                      icon: Icon(
+                        Icons.send_outlined,
+                        size: 20,
+                      ),
+                      onPressed: null,
+                    ),
                   ],
                 ),
               ),

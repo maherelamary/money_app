@@ -12,14 +12,22 @@ InputDecoration loginInputDecoration({
 }) =>
     InputDecoration(
       labelText: labelText,
+      labelStyle: TextStyle(
+        fontSize: 13.0,
+        fontFamily: 'Cairo',
+      ),
       hintText: hintText,
       errorStyle: TextStyle(height: 0),
+      hintStyle: TextStyle(
+        fontSize: 13.0,
+        fontFamily: 'Cairo',
+      ),
       floatingLabelBehavior: isAlwaysBehavior
           ? FloatingLabelBehavior.always
           : FloatingLabelBehavior.never,
       suffixIcon: CustomSuffixIcon(suffixIcon: suffixIcon),
       contentPadding: const EdgeInsets.symmetric(
-        horizontal: 40.0,
+        horizontal: 30.0,
         vertical: 15,
       ),
       enabledBorder: OutlineInputBorder(

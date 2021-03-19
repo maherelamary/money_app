@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/UI/widgets/error_container.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/utils/constants.dart';
@@ -29,7 +29,7 @@ class _SignUpFormState extends State<SignUpForm> {
   //bool remember = false;
   final List<String> errors = [];
 
-  SignUpModel signUpModel = SignUpModel();
+  LoginModel loginModel = LoginModel();
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -47,7 +47,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    signUpModel = Provider.of<SignUpModel>(context);
+    loginModel = Provider.of<LoginModel>(context);
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -163,7 +163,7 @@ class _SignUpFormState extends State<SignUpForm> {
               child: AnimatedButton(
                 title: AppLocalizations.of(context).sendCodeLabel,
                 clicked: clicked,
-                serverLoader: signUpModel.loading,
+                serverLoader: loginModel.loading,
                 onComplete: () {
                   print('onComplete');
                   Map<String, dynamic> registeredData = {
@@ -176,11 +176,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     "password": password,
                     "confirmPassword": conformPass,
                   };
-                  signUpModel.registerMobile(registerData: registeredData);
+                  loginModel.registerMobile(registerData: registeredData);
                   setState(() {
                     clicked = false;
                   });
-                  if (signUpModel.getProfile() != null) {
+                  if (loginModel.getProfile != null) {
                     Navigator.pushNamed(context, OtpScreen.routeName);
                   }
 
@@ -214,9 +214,9 @@ class _SignUpFormState extends State<SignUpForm> {
           return null;
         },
         decoration: loginInputDecoration(
-          labelText: "Username",
-          hintText: "Enter your username",
-          isAlwaysBehavior: false,
+          labelText: AppLocalizations.of(context).usernameLabel,
+          hintText: AppLocalizations.of(context).usernameHint,
+          isAlwaysBehavior: true,
           suffixIcon: ImagesAsset.cardIdIcon,
         ),
       );

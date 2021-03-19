@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class AppNotification {
   String title;
   String body;

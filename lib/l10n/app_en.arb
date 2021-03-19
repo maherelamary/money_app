@@ -4,7 +4,7 @@
     "description": "App Greeting"
     },
 
-    "loginBodyText": "The evidence that numbers are treasure",
+    "loginBodyText": "The evidence that numbers are still a treasure",
     "@loginBodyText": {
     "description": "Login page header"
     },
@@ -59,7 +59,7 @@
     "description": "Sign up form username label"
     }, 
 
-    "usernameHint": "Available for all users",
+    "usernameHint": "this name is seen by all users",
     "@usernameHint": {
     "description": "Sign up form username hint"
     },
@@ -105,6 +105,16 @@
     "description": "label"
     },
 
+    "otpHeader": "Code Verification",
+    "@otpHeader": {
+    "description": "Header of OTP screen"
+    },
+
+    "otpGuideText": "We have send the code to ",
+    "@otpHeader": {
+    "description": "Info about OTP screen"
+    },
+
     "confirmLabel": "Confirm",
     "@confirmLabel": {
     "description": "label"
@@ -132,7 +142,14 @@
 
     "currentQuestionLabel": "Current Question",
     "@currentQuestion": {
+    "description": "current question label"
+    },
+
+    "postAnswerLabel": "Post answer",
+    "@postAnswerLabel": {
     "description": "label"
     }
+
+  
 
 }

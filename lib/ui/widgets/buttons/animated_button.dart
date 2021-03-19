@@ -66,28 +66,30 @@ class _AnimatedButtonState extends State<AnimatedButton>
       animation: _controller,
       builder: (context, _) {
         return Container(
-            height: 50.0,
-            width: _containerWidth.value,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: ColorPalettes.secondaryColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(50),
-              ),
+          height: 50.0,
+          width: _containerWidth.value,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: ColorPalettes.secondaryColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
             ),
-            child: widget.serverLoader
-                ? Container(
-                    height: 40.0,
-                    width: 40.0,
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      strokeWidth: 2.0,
-                    ),
-                  )
-                : Text(
-                    widget.title,
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                  ));
+          ),
+          child: widget.serverLoader
+              ? Container(
+                  height: 40.0,
+                  width: 40.0,
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                    strokeWidth: 2.0,
+                  ),
+                )
+              : Text(
+                  widget.title,
+                  style: TextStyle(
+                      fontSize: 18.0, fontFamily: 'Cairo', color: Colors.white),
+                ),
+        );
       },
     );
   }

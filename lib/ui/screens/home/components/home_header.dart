@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/core/model/user.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/utils/color_palettes.dart';
@@ -14,9 +15,26 @@ class HomeHeader extends StatefulWidget {
 
 class _HomeHeaderState extends State<HomeHeader> {
   LoginModel loginModel = LoginModel();
+  User user;
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      user = loginModel.getUser;
+      print("from init${user}");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     loginModel = Provider.of<LoginModel>(context);
+    if (user == null) {
+      setState(() {
+        user = loginModel.getUser;
+        print("from build${user}");
+      });
+    }
+
     return Container(
       child: Column(
         children: [
@@ -32,28 +50,31 @@ class _HomeHeaderState extends State<HomeHeader> {
               width: double.infinity,
               height: 200.0,
               child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ProfileAvatar(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      loginModel.getUser() != null
-                          ? loginModel.getUser().profile.displayName
-                          : 'UNKNOWN',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white,
+                child: user != null
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ProfileAvatar(),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            user.profile.displayName,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              fontFamily: 'Cairo',
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                        ],
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
                       ),
-                    ),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                  ],
-                ),
               ),
             ),
           ),

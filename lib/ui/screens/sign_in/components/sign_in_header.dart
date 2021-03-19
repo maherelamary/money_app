@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:money_app/utils/images_asset.dart';
 
 class BuildHeader extends StatelessWidget {
   const BuildHeader({
@@ -16,16 +17,27 @@ class BuildHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-            AppLocalizations.of(context).greeting,
-            style: ColorPalettes.headerTextStyle,
+          Image.asset(
+            ImagesAsset.logo,
+            width: 70,
+            height: 70,
           ),
-          SizedBox(
-            height: 4.0,
+          Text(
+            "money app".toUpperCase(),
+            style: TextStyle(
+                color: ColorPalettes.primaryColor,
+                fontFamily: 'Changa',
+                fontWeight: FontWeight.bold,
+                fontSize: 45.0),
+            textAlign: TextAlign.center,
           ),
           Text(
             AppLocalizations.of(context).loginBodyText,
-            style: ColorPalettes.bodyTextStyle,
+            style: TextStyle(
+                color: ColorPalettes.primaryColor,
+                fontFamily: 'Changa',
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0),
             textAlign: TextAlign.center,
           ),
         ],

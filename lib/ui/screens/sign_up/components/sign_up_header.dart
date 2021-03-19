@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:money_app/utils/images_asset.dart';
+
 class BuildSignUpHeader extends StatelessWidget {
   const BuildSignUpHeader({
     Key key,
@@ -15,6 +17,11 @@ class BuildSignUpHeader extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Image.asset(
+            ImagesAsset.smilingbanner,
+            width: 50,
+            height: 50,
+          ),
           SizedBox(
             height: 4.0,
           ),

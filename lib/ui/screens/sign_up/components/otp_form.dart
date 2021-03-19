@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/UI/widgets/otp_input_decoration.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ class OtpForm extends StatefulWidget {
 }
 
 class _OtpFormState extends State<OtpForm> {
+  LoginModel loginModel = LoginModel();
   FocusNode pin2FocusNode;
   FocusNode pin3FocusNode;
   FocusNode pin4FocusNode;
@@ -29,7 +30,7 @@ class _OtpFormState extends State<OtpForm> {
   String number4;
   String number5;
   String number6;
-  SignUpModel signUpModel = SignUpModel();
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +59,7 @@ class _OtpFormState extends State<OtpForm> {
 
   @override
   Widget build(BuildContext context) {
-    signUpModel = Provider.of<SignUpModel>(context);
+    loginModel = Provider.of<LoginModel>(context);
     return Form(
       child: Column(
         children: [
@@ -213,15 +214,17 @@ class _OtpFormState extends State<OtpForm> {
                     number1 + number2 + number3 + number4 + number5 + number6;
                 print(otpCode);
 
-                if (signUpModel.getOTP()) {
-                  if (otpCode == signUpModel.getProfile().otp) {
+                if (loginModel.getOTP()) {
+                  print(
+                      "hello world ${loginModel.getProfile.isMobileVerified} hh ${loginModel.getProfile.mobileCountryCode} hh ${loginModel.getProfile.mobile}");
+                  if (otpCode == loginModel.getProfile.otp) {
                     print("Verified");
                     Map<String, dynamic> registeredData = {
-                      "code": signUpModel.getProfile().otp,
-                      "mobile": signUpModel.getProfile().mobileCountryCode +
-                          signUpModel.getProfile().mobile
+                      "code": loginModel.getProfile.otp,
+                      "mobile": loginModel.getProfile.mobileCountryCode +
+                          loginModel.getProfile.mobile
                     };
-                    signUpModel.verifyUserMobile(registerData: registeredData);
+                    loginModel.verifyUserMobile(registerData: registeredData);
                   } else {
                     Fluttertoast.showToast(
                       msg: 'Please, Type a valid verification code',

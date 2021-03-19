@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
 import 'package:money_app/utils/sizes.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class ProfileAvatar extends StatefulWidget {
   ProfileAvatar({Key key}) : super(key: key);
@@ -46,7 +46,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                 icon: Icon(
                   Icons.camera_alt,
                   size: 30.0,
-                  color: ColorPalettes.thirdColor,
+                  color: Colors.white60,
                 ),
                 onPressed: () => showModalBottomSheet(
                       context: context,
@@ -85,7 +85,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                 },
                 child: _buildListItem(
                   context,
-                  title: Text('Select from gallery'),
+                  title: Text(AppLocalizations.of(context).galleryButton),
                   leading: Icon(
                     Icons.camera,
                     color: ColorPalettes.thirdColor,
@@ -106,7 +106,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                 },
                 child: _buildListItem(
                   context,
-                  title: Text('Take a Photo'),
+                  title: Text(AppLocalizations.of(context).cameraButton),
                   leading: Icon(
                     Icons.camera_alt,
                     color: ColorPalettes.thirdColor,

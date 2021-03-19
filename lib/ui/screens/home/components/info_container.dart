@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:money_app/utils/images_asset.dart';
+
 class InfoContainer extends StatefulWidget {
   InfoContainer({Key key}) : super(key: key);
 
@@ -18,59 +20,78 @@ class _InfoContainerState extends State<InfoContainer> {
       clipBehavior: Clip.antiAlias,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "60",
                     style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: ColorPalettes.thirdColor,
+                      fontSize: 16.0,
+                      fontFamily: 'Changa',
+                      color: ColorPalettes.lightColor,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: Text(
-                    AppLocalizations.of(context).pointsLabel,
-                    style: TextStyle(
-                      fontSize: 13.0,
-                      fontWeight: FontWeight.w300,
-                      color: ColorPalettes.borderColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).pointsLabel,
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontFamily: 'Cairo',
+                        color: Colors.blueGrey,
+                      ),
                     ),
-                  ),
+                    Image.asset(
+                      ImagesAsset.pointsIcon,
+                      width: 25.0,
+                      height: 25.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "1:60",
                     style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: ColorPalettes.thirdColor,
+                      fontSize: 18.0,
+                      fontFamily: 'Changa',
+                      color: ColorPalettes.lightColor,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 4.0),
-                  child: Text(
-                    AppLocalizations.of(context).timerLabel,
-                    style: TextStyle(
-                      fontSize: 13.0,
-                      fontWeight: FontWeight.w300,
-                      color: ColorPalettes.borderColor,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).timerLabel,
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontFamily: 'Cairo',
+                        color: Colors.blueGrey,
+                      ),
                     ),
-                  ),
+                    Image.asset(
+                      ImagesAsset.timerIcon,
+                      width: 25.0,
+                      height: 25.0,
+                      fit: BoxFit.fill,
+                    ),
+                  ],
                 ),
               ],
             ),

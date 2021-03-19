@@ -4,7 +4,6 @@ import 'package:money_app/UI/screens/sign_up/otp_screen.dart';
 import 'package:money_app/UI/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
-import 'package:money_app/core/viewModel/sign_up_model.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/ui/widgets/buttons/custom_button.dart';
 import 'package:money_app/ui/widgets/error_container.dart';
@@ -27,7 +26,7 @@ class _SignInFormState extends State<SignInForm> {
   TextEditingController phoneNumberController = TextEditingController();
   String password;
   TextEditingController passwordController = TextEditingController();
-  bool _remember = false;
+  //bool _remember = false;
   bool _clicked = false;
   final List<String> errors = [];
   LoginModel loginModel = LoginModel();
@@ -221,8 +220,8 @@ class _SignInFormState extends State<SignInForm> {
             return null;
           },
           decoration: loginInputDecoration(
-              labelText: "Phone",
-              hintText: "Enter phone number",
+              labelText: AppLocalizations.of(context).phoneLabel,
+              hintText: AppLocalizations.of(context).phoneHint,
               isAlwaysBehavior: true,
               suffixIcon: ImagesAsset.phoneIcon),
         ),
@@ -247,8 +246,8 @@ class _SignInFormState extends State<SignInForm> {
           return null;
         },
         decoration: loginInputDecoration(
-            labelText: "Password",
-            hintText: "Enter Password",
+            labelText: AppLocalizations.of(context).passwordLabel,
+            //hintText: "Enter Password",
             isAlwaysBehavior: true,
             suffixIcon: ImagesAsset.passwordIcon),
       );

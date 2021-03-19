@@ -11,18 +11,23 @@ class ColorPalettes {
   static Color textColor = Color(0xff696b6a);
   static Color borderColor = Color(0xffa0a2a0);
   //Some Static For style
-  static TextStyle bodyTextStyle =
-      TextStyle(color: Colors.black45, fontSize: 15.0);
+  static TextStyle bodyTextStyle = TextStyle(
+    color: Colors.black45,
+    fontSize: 15.0,
+    fontFamily: 'Cairo',
+  );
 
   static TextStyle headerTextStyle = TextStyle(
     color: primaryColor,
     fontSize: 36.0,
+    fontFamily: 'Cairo',
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle lightHeaderTextStyle = TextStyle(
     color: primaryColor.withOpacity(.3),
     fontSize: 36.0,
+    fontFamily: 'Cairo',
     fontWeight: FontWeight.bold,
   );
 
