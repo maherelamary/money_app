@@ -13,4 +13,6 @@ class ImagesAsset {
   static String winnerbanner = "assets/img/winnerbanner.png";
   static String winnerborder = "assets/img/winnerborder.png";
   static String cupIcon = "assets/img/cup.png";
+  static String contactUs = "assets/img/contactus.png";
+  static String sendIcon = "assets/img/send.png";
 }

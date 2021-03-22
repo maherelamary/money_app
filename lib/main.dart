@@ -8,6 +8,7 @@ import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/l10n/l10n.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
+import 'package:money_app/ui/screens/settings/contact_us.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/ui/screens/splash/splash_screen.dart';
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         navigatorKey: navigatorKey,
-        initialRoute: SplashScreen.routeName,
+        initialRoute: ContactUsScreen.routeName,
         routes: routes,
         onGenerateRoute: (settings) {
           switch (settings.name) {
