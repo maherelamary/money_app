@@ -30,7 +30,7 @@
     },
 
     "passwordLabel": "Password",
-    "@password": {
+    "@passwordLabel": {
     "description": "Sign in form password label"
     },
 
@@ -111,7 +111,7 @@
     },
 
     "otpGuideText": "We have send the code to ",
-    "@otpHeader": {
+    "@otpGuideText": {
     "description": "Info about OTP screen"
     },
 
@@ -141,7 +141,7 @@
     },
 
     "currentQuestionLabel": "Current Question",
-    "@currentQuestion": {
+    "@currentQuestionLabel": {
     "description": "current question label"
     },
 
