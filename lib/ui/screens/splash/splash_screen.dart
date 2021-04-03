@@ -13,7 +13,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   //[logo radius] regard to screen boundaries.
-  final double zoomIn = 1.5;
+  static const double zoomIn = 1.5;
+
   @override
   void initState() {
     super.initState();
@@ -32,11 +33,12 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Container(
             decoration: BoxDecoration(
-              gradient: RadialGradient(
-                stops: [0.3, 1.0],
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
-                  Colors.yellow,
-                  ColorPalettes.primaryColor,
+                  ColorPalettes.appColor,
+                  ColorPalettes.appAccentColor,
                 ],
               ),
             ),

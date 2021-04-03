@@ -8,6 +8,7 @@ import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/l10n/l10n.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
+import 'package:money_app/ui/screens/land_screen.dart';
 import 'package:money_app/ui/screens/settings/contact_us.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
@@ -17,6 +18,8 @@ import 'package:money_app/utils/color_palettes.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+
+import 'ui/screens/splash/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,13 +59,10 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-            // color: Colors.white70,
-            color: ColorPalettes.secondaryColor,
+            color: ColorPalettes.appAccentColor,
             elevation: 2.0,
             centerTitle: true,
-            shadowColor: Colors.pink,
           ),
-          primarySwatch: Colors.pink,
           brightness: Brightness.light,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate,
         ],
         navigatorKey: navigatorKey,
-        initialRoute: ContactUsScreen.routeName,
+        initialRoute: LandScreen.routeName,
         routes: routes,
         onGenerateRoute: (settings) {
           switch (settings.name) {
@@ -83,8 +83,8 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(seconds: 5),
-                duration: Duration(seconds: 5),
+                reverseDuration: Duration(milliseconds: 1000),
+                duration: Duration(milliseconds: 1000),
                 curve: Curves.fastOutSlowIn,
               );
               break;
@@ -93,8 +93,8 @@ class _MyAppState extends State<MyApp> {
                 child: SignUpScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(seconds: 5),
-                duration: Duration(seconds: 5),
+                reverseDuration: Duration(milliseconds: 1000),
+                duration: Duration(milliseconds: 1000),
                 curve: Curves.fastOutSlowIn,
               );
               break;
@@ -103,8 +103,8 @@ class _MyAppState extends State<MyApp> {
                 child: HomeScreen(),
                 type: PageTransitionType.rightToLeftWithFade,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 1500),
-                duration: Duration(milliseconds: 1500),
+                reverseDuration: Duration(milliseconds: 700),
+                duration: Duration(milliseconds: 700),
                 curve: Curves.easeInOutCubic,
               );
               break;
@@ -113,8 +113,8 @@ class _MyAppState extends State<MyApp> {
                 child: WinnerScreen(),
                 type: PageTransitionType.bottomToTop,
                 settings: settings,
-                reverseDuration: Duration(milliseconds: 1000),
-                duration: Duration(milliseconds: 1000),
+                reverseDuration: Duration(milliseconds: 700),
+                duration: Duration(milliseconds: 700),
                 curve: Curves.fastOutSlowIn,
               );
               break;

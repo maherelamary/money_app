@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:money_app/core/local_storage.dart';
 import 'package:money_app/core/model/user.dart';
 import 'package:money_app/core/services/authentication_services.dart';
 import 'package:money_app/main.dart';
@@ -109,6 +110,7 @@ class LoginModel extends ChangeNotifier {
         print('hhhhhhhhh');
         print(newUser.token);
         print(newUser.refreshToken);
+        LocalStorage().saveUser(user: newUser);
         navigatorKey.currentState.pushNamed(LandScreen.routeName);
       } else if (data['success'] == false && data['errors'] != null) {
         _errorMessages.clear();
@@ -158,6 +160,7 @@ class LoginModel extends ChangeNotifier {
         print(_user.token);
         print(_user.profile.otp);
         print(_user.refreshToken);
+        LocalStorage().saveUser(user: _user);
         navigatorKey.currentState.pushNamed(LandScreen.routeName);
       } else if (data['success'] == false && data['errors'] != null) {
         _errorMessages.clear();

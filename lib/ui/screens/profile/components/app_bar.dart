@@ -17,7 +17,16 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
           clipper: _AppBarClipper(),
           child: Container(
             height: 200,
-            color: ColorPalettes.lightColor,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  ColorPalettes.appColor,
+                  ColorPalettes.appAccentColor,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
         ),
         Positioned(

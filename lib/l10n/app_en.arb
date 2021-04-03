@@ -148,8 +148,157 @@
     "postAnswerLabel": "Post answer",
     "@postAnswerLabel": {
     "description": "label"
+    },
+
+    "aboutUsLabel": "ABOUT US",
+    "@aboutUsLabel": {
+    "description": "About Us label"
+    },
+
+    "contactUsLabel": "CONTACT US",
+    "@contactUsLabel": {
+    "description": "Contact Us label"
+    },
+
+    "nameLabel": "NAME",
+    "@nameLabel": {
+    "description": "name label"
+    },
+
+    "phoneNumberLabel": "PHONE",
+    "@phoneNumberLabel": {
+    "description": "phone label"
+    },
+
+    "emailLabel": "E-MAIL",
+    "@emailLabel": {
+    "description": "E-mail label"
+    },
+
+    "termsLabel": "TERMS & CONDITIONS",
+    "@termsLabel": {
+    "description": "terms and conditions label"
+    },
+
+    "settingsLabel": "SETTINGS",
+    "@settingsLabel": {
+    "description": "settings label"
+    },
+
+    "privacyLabel": "PRIVACY",
+    "@privacyLabel": {
+    "description": "privacy label"
+    },
+
+    "profileLabel": "PROFILE",
+    "@profileLabel": {
+    "description": "profile label"
+    },
+
+    "logoutLabel": "LOG OUT",
+    "@logoutLabel": {
+    "description": "log out label"
+    },
+
+    "iniviteFriendsLabel": "INVITE FRIENDS",
+    "@iniviteFriendsLabel": {
+    "description": "invite friends label"
+    },
+
+    "subscriptionLabel": "SUBSCRIPTION",
+    "@subscriptionLabel": {
+    "description": "subscription label"
+    },
+
+    "sendLabel": "Send",
+    "@sendLabel": {
+    "description": "send label"
+    },
+
+    "messageLabel": "MESSAGE",
+    "@messageLabel": {
+    "description": "message label"
+    },
+
+    "chatLabel": "Chat",
+    "@chatLabel": {
+    "description": "chat label"
+    },
+
+    "homeLabel": "Home",
+    "@homeLabel": {
+    "description": "home label"
+    },
+
+    "helpLabel": "HELP & SUPPORT",
+    "@helpLabel": {
+    "description": "Profile HELP & SUPPORT  label"
+    },
+
+    "purchaseHistoryLabel": "PURCHASE HISTORY",
+    "@purchaseHistoryLabel": {
+    "description": "Profile PURCHASE HISTORY  label"
+    },
+
+    
+    "editProfileLabel": "Privacy & Profile",
+    "@editProfileLabel": {
+    "description": "edit profile label"
+    },
+
+    "fullnameEditProfileLabel": "Full Name",
+    "@fullnameEditProfileLabel": {
+    "description": "name in edit profile screen"
+    },
+
+    "usernameEditProfileLabel": "Username",
+    "@nameEditProfileLabel": {
+    "description": "username in edit profile screen"
+    },
+
+    "passwordEditProfileLabel": "Password",
+    "@passwordEditProfileLabel": {
+    "description": "password in edit profile screen"
+    },
+
+    "conformPasswordEditProfileLabel": "Conform password",
+    "@conformPasswordEditProfileLabel": {
+    "description": "username in edit profile screen"
+    },
+
+    "submitEditProfileLabel": "Submit",
+    "@submitEditProfileLabel": {
+    "description": "submit button in winner profile screen"
+    },
+    
+    "shareWinnerProfileLabel": "Share",
+    "@shareWinnerProfileLabel": {
+    "description": "share button in winner profile screen"
+    },
+
+    "backWinnerProfileLabel": "Back",
+    "@backWinnerProfileLabel": {
+    "description": "back button in winner profile screen"
+    },
+
+    "agentsLabel": "App Agants",
+    "@agentsLabel": {
+    "description": "app agants label"
+    },
+
+    "whoAreWeLabel": "About Us",
+    "@whoAreWeLabel": {
+    "description": "about us label"
+    },
+
+    "honorBoardLabel": "Honor Board",
+    "@honorBoardLabel": {
+    "description": "honor board label"
     }
 
-  
+    
+    
+
+
 
 }

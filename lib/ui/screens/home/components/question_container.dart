@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/ui/screens/winner/prize.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:money_app/utils/images_asset.dart';
 
 class QuestionContainer extends StatefulWidget {
   @override
@@ -48,37 +50,29 @@ class _QuestionContainerState extends State<QuestionContainer> {
             SizedBox(
               height: 10.0,
             ),
-            Card(
-              elevation: 2.0,
-              child: Container(
-                height: 40.0,
-                width: 180.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Colors.blueGrey.shade100,
-                      size: 30.0,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.blueGrey.shade100,
-                      size: 30.0,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.blueGrey.shade100,
-                      size: 30.0,
-                    ),
-                    Icon(
-                      Icons.star,
-                      color: Colors.blueGrey.shade100,
-                      size: 30.0,
-                    ),
-                  ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Opacity(
+                  opacity: 0.0,
+                  child: Image.asset(
+                    ImagesAsset.prizeIcon,
+                    height: 30.0,
+                    width: 30.0,
+                  ),
                 ),
-              ),
+                _buildAnswerContainer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, PrizeScreen.routeName);
+                  },
+                  child: Image.asset(
+                    ImagesAsset.prizeIcon,
+                    height: 30.0,
+                    width: 30.0,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 10.0,
@@ -130,6 +124,58 @@ class _QuestionContainerState extends State<QuestionContainer> {
                   ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _buildAnswerContainer extends StatelessWidget {
+  const _buildAnswerContainer({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2.0,
+      child: Container(
+        height: 50.0,
+        padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
+            ),
+            Icon(
+              Icons.star,
+              color: Colors.blueGrey.shade100,
+              size: 30.0,
             ),
           ],
         ),

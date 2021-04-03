@@ -15,4 +15,15 @@ class ImagesAsset {
   static String cupIcon = "assets/img/cup.png";
   static String contactUs = "assets/img/contactus.png";
   static String sendIcon = "assets/img/send.png";
+  static String subscriptionIcon = "assets/img/subscription.png";
+  static String aboutUsIcon = "assets/img/aboutUs.png";
+  static String agantIcon = "assets/img/agant.png";
+  static String contactUsIcon = "assets/img/mobile_email.png";
+  static String helpIcon = "assets/img/information.png";
+  static String emailIcon = "assets/img/email.png";
+  static String coin = "assets/img/coin.png";
+  static String celebrationBg = "assets/img/celebration_bg.jpg";
+  static String bottomBg = "assets/img/bottom_winner_bg.jpg";
+  static String prizeIcon = "assets/img/prize_icon.png";
+  static String wreathIcon = "assets/img/wreath.png";
 }

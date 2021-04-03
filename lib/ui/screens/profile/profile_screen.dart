@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/ui/screens/profile/components/app_bar.dart';
+import 'package:money_app/ui/screens/profile/components/edit_profile_screen.dart';
 import 'package:money_app/ui/screens/profile/components/profile_list_item.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
+
+import 'package:money_app/ui/screens/profile/help_support.dart';
+import 'package:money_app/ui/screens/profile/terms_conditions.dart';
+import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
@@ -41,6 +47,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.w400,
                 ),
               ),
+              Text(
+                'ID',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontFamily: 'Cairo',
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             ],
           ),
           SizedBox(
@@ -61,20 +76,49 @@ class ProfileListItems extends StatelessWidget {
         children: <Widget>[
           ProfileListItem(
             icon: Icons.person_add_alt_1_sharp,
-            text: 'Invite a Friend',
+            text: AppLocalizations.of(context).iniviteFriendsLabel,
           ),
           ProfileListItem(
             icon: Icons.history,
-            text: 'Purchase History',
+            text: AppLocalizations.of(context).purchaseHistoryLabel,
           ),
-          ProfileListItem(
-            icon: Icons.help_outline,
-            text: 'Help & Support',
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, HelpAndSupportScreen.routeName);
+            },
+            child: ProfileListItem(
+              icon: Icons.help_outline,
+              text: AppLocalizations.of(context).helpLabel,
+            ),
           ),
-          ProfileListItem(
-            icon: Icons.logout,
-            text: 'Logout',
-            hasNavigation: false,
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, TermsAndConditionsScreen.routeName);
+            },
+            child: ProfileListItem(
+              icon: Icons.insert_drive_file,
+              text: AppLocalizations.of(context).termsLabel,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, EditProfileScreen.routeName);
+            },
+            child: ProfileListItem(
+              icon: Icons.privacy_tip_outlined,
+              text: AppLocalizations.of(context).editProfileLabel,
+              hasNavigation: true,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, SignInScreen.routeName);
+            },
+            child: ProfileListItem(
+              icon: Icons.logout,
+              text: AppLocalizations.of(context).logoutLabel,
+              hasNavigation: false,
+            ),
           ),
         ],
       ),

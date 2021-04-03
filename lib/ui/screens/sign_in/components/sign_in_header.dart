@@ -25,7 +25,7 @@ class BuildHeader extends StatelessWidget {
           Text(
             "money app".toUpperCase(),
             style: TextStyle(
-                color: ColorPalettes.primaryColor,
+                color: ColorPalettes.appAccentColor,
                 fontFamily: 'Changa',
                 fontWeight: FontWeight.bold,
                 fontSize: 45.0),
@@ -34,7 +34,7 @@ class BuildHeader extends StatelessWidget {
           Text(
             AppLocalizations.of(context).loginBodyText,
             style: TextStyle(
-                color: ColorPalettes.primaryColor,
+                color: ColorPalettes.appColor,
                 fontFamily: 'Changa',
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0),

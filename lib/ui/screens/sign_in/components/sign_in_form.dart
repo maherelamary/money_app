@@ -109,7 +109,7 @@ class _SignInFormState extends State<SignInForm> {
               //     Container(
               //       child: Checkbox(
               //         value: _remember,
-              //         activeColor: ColorPalettes.primaryColor,
+              //         activeColor: ColorPalettes,
               //         onChanged: (isRemembered) {
               //           setState(
               //             () {

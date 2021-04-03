@@ -8,6 +8,7 @@ import 'package:money_app/ui/screens/settings/settings_screen.dart';
 import 'package:money_app/ui/screens/winner/winner_screen.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class LandScreen extends StatefulWidget {
   static String routeName = '/land';
@@ -72,17 +73,17 @@ class _LandScreenState extends State<LandScreen> {
                         Icon(
                           Icons.home_outlined,
                           color: currentTab == 0
-                              ? ColorPalettes.secondaryColor
+                              ? ColorPalettes.appAccentColor
                               : Colors.grey,
                           size: currentTab == 0 ? 34.0 : 24.0,
                         ),
                         Text(
-                          'Home',
+                          AppLocalizations.of(context).homeLabel,
                           style: TextStyle(
                             fontFamily: 'Cairo',
-                            fontSize: currentTab == 0 ? 12.0 : 14.0,
+                            fontSize: currentTab == 0 ? 10.0 : 12.0,
                             color: currentTab == 0
-                                ? ColorPalettes.secondaryColor
+                                ? ColorPalettes.appAccentColor
                                 : Colors.grey,
                           ),
                         ),
@@ -104,17 +105,17 @@ class _LandScreenState extends State<LandScreen> {
                         Icon(
                           Icons.chat,
                           color: currentTab == 1
-                              ? ColorPalettes.secondaryColor
+                              ? ColorPalettes.appAccentColor
                               : Colors.grey,
                           size: currentTab == 1 ? 34.0 : 24.0,
                         ),
                         Text(
-                          'Chat',
+                          AppLocalizations.of(context).chatLabel,
                           style: TextStyle(
                             fontFamily: 'Cairo',
-                            fontSize: currentTab == 1 ? 12.0 : 14.0,
+                            fontSize: currentTab == 1 ? 10.0 : 12.0,
                             color: currentTab == 1
-                                ? ColorPalettes.secondaryColor
+                                ? ColorPalettes.appAccentColor
                                 : Colors.grey,
                           ),
                         ),
@@ -142,17 +143,17 @@ class _LandScreenState extends State<LandScreen> {
                         Icon(
                           Icons.person,
                           color: currentTab == 2
-                              ? ColorPalettes.secondaryColor
+                              ? ColorPalettes.appAccentColor
                               : Colors.grey,
                           size: currentTab == 2 ? 34.0 : 24.0,
                         ),
                         Text(
-                          'Profile',
+                          AppLocalizations.of(context).profileLabel,
                           style: TextStyle(
                             fontFamily: 'Cairo',
-                            fontSize: currentTab == 2 ? 12.0 : 14.0,
+                            fontSize: currentTab == 2 ? 10.0 : 12.0,
                             color: currentTab == 2
-                                ? ColorPalettes.secondaryColor
+                                ? ColorPalettes.appAccentColor
                                 : Colors.grey,
                           ),
                         ),
@@ -174,17 +175,17 @@ class _LandScreenState extends State<LandScreen> {
                         Icon(
                           Icons.settings,
                           color: currentTab == 3
-                              ? ColorPalettes.secondaryColor
+                              ? ColorPalettes.appAccentColor
                               : Colors.grey,
                           size: currentTab == 3 ? 34.0 : 24.0,
                         ),
                         Text(
-                          'Settings',
+                          AppLocalizations.of(context).settingsLabel,
                           style: TextStyle(
                             fontFamily: 'Cairo',
-                            fontSize: currentTab == 3 ? 12.0 : 14.0,
+                            fontSize: currentTab == 3 ? 10.0 : 12.0,
                             color: currentTab == 3
-                                ? ColorPalettes.secondaryColor
+                                ? ColorPalettes.appAccentColor
                                 : Colors.grey,
                           ),
                         ),

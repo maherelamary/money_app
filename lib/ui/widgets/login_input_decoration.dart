@@ -39,7 +39,7 @@ InputDecoration loginInputDecoration({
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(29),
         borderSide: BorderSide(
-          color: ColorPalettes.primaryColor,
+          color: ColorPalettes.appAccentColor,
         ),
       ),
       border: OutlineInputBorder(
@@ -57,7 +57,7 @@ InputDecoration loginInputDecoration({
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(29),
         borderSide: BorderSide(
-          color: ColorPalettes.primaryColor,
+          color: ColorPalettes.appAccentColor,
         ),
       ),
     );
@@ -92,7 +92,7 @@ InputDecoration loginInputDecorationWOIcon({
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(29),
         borderSide: BorderSide(
-          color: ColorPalettes.primaryColor,
+          color: ColorPalettes.appAccentColor,
         ),
       ),
       border: OutlineInputBorder(
@@ -104,7 +104,7 @@ InputDecoration loginInputDecorationWOIcon({
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(29),
         borderSide: BorderSide(
-          color: ColorPalettes.primaryColor,
+          color: ColorPalettes.appAccentColor,
         ),
       ),
     );

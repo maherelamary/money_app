@@ -103,12 +103,9 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 15.0,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 8.0),
+              margin: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 15.0),
               height: 50.0,
               child: buildFirstNameFormField(),
-            ),
-            SizedBox(
-              height: 15.0,
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8.0),

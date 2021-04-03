@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 
 class ColorPalettes {
   //Colors for theme
-  static Color primaryColor = Color(0xffa01e66);
+  //E84D8A
+  //7F58AF
+  //FEB326
+  //64C5EB
+  static Color appColor = Color(0xffE84D8A);
+  static Color appAccentColor = Color(0xff7F58AF);
+  static Color appBorderColor = Color(0xffFEB326);
+  static Color appBreakColor = Color(0xff64C5EB);
   static Color secondaryColor = Color(0xffb71e5f);
   static Color thirdColor = Color(0xff36b4e6);
   static Color lightColor = Color(0xffd31c5e);
@@ -18,25 +25,25 @@ class ColorPalettes {
   );
 
   static TextStyle headerTextStyle = TextStyle(
-    color: primaryColor,
+    color: appColor,
     fontSize: 36.0,
     fontFamily: 'Cairo',
     fontWeight: FontWeight.bold,
   );
 
   static TextStyle lightHeaderTextStyle = TextStyle(
-    color: primaryColor.withOpacity(.3),
+    color: appColor,
     fontSize: 36.0,
     fontFamily: 'Cairo',
     fontWeight: FontWeight.bold,
   );
 
   static LinearGradient primaryGradientColor = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
     colors: [
-      primaryColor,
-      lightColor,
+      appColor,
+      appAccentColor,
     ],
   );
 

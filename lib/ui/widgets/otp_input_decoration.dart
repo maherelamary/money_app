@@ -14,6 +14,6 @@ OutlineInputBorder outlineInputBorder({bool isfocused = false}) =>
     OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
       borderSide: isfocused
-          ? BorderSide(color: ColorPalettes.lightColor)
-          : BorderSide(color: ColorPalettes.primaryColor),
+          ? BorderSide(color: ColorPalettes.appAccentColor)
+          : BorderSide(color: ColorPalettes.appColor),
     );

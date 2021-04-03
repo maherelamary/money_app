@@ -70,7 +70,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
         bottom: 10.0,
       ),
       decoration: BoxDecoration(
-        color: ColorPalettes.borderColor.withOpacity(0.5),
+        color: ColorPalettes.appColor.withOpacity(0.5),
         borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       ),
       child: Center(
@@ -94,7 +94,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               ),
             ),
             Divider(
-              color: ColorPalettes.borderColor,
+              color: ColorPalettes.appAccentColor,
               thickness: 1.5,
               indent: 20.0,
               endIndent: 20.0,
@@ -164,7 +164,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
         child: Container(
           height: 5.0,
           decoration: BoxDecoration(
-            color: ColorPalettes.borderColor.withOpacity(0.5),
+            color: ColorPalettes.appAccentColor,
             borderRadius: const BorderRadius.all(Radius.circular(2.5)),
           ),
         ),

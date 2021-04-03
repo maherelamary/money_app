@@ -49,6 +49,7 @@ class _HomeHeaderState extends State<HomeHeader> {
             child: Container(
               width: double.infinity,
               height: 200.0,
+              color: ColorPalettes.appColor,
               child: Center(
                 child: user != null
                     ? Column(

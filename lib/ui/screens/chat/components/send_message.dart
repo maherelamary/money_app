@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
+import 'package:money_app/utils/color_palettes.dart';
 import 'package:provider/provider.dart';
 
 class SendMessageContainer extends StatefulWidget {
@@ -79,7 +80,7 @@ class _SendMessageContainerState extends State<SendMessageContainer> {
             },
             fillColor: _message == null || _message.isEmpty
                 ? Colors.blueGrey
-                : Theme.of(context).primaryColor,
+                : ColorPalettes.appAccentColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),

@@ -100,6 +100,8 @@ class Profile {
     //this.pictureFormat,
     this.otp,
     this.id,
+    this.password,
+    this.conformPassword,
     // this.createdDateTime,
     // this.status,
   });
@@ -111,6 +113,8 @@ class Profile {
   String firstName;
   String middleName;
   String lastName;
+  String password;
+  String conformPassword;
   int gender;
   String country;
   String countryCode;
@@ -150,6 +154,8 @@ class Profile {
         //pictureFormat: json["pictureFormat"],
         otp: json["otp"],
         id: json["id"],
+        password: json["password"],
+        conformPassword: json["conform_password"],
         //createdDateTime: DateTime.parse(json["createdDateTime"]),
         //status: json["status"],
       );
@@ -172,6 +178,8 @@ class Profile {
         "profilePicture": profilePicture,
         "displayName": displayName,
         "role": role,
+        "password": password,
+        "conform_password": conformPassword,
         //"picture": picture,
         //"pictureFormat": pictureFormat,
         //"otp": otp,

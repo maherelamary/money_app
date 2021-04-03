@@ -1,6 +1,18 @@
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:money_app/ui/screens/winner/compoments/custom_back_button.dart';
+import 'package:money_app/ui/screens/winner/compoments/custom_share_button.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
+import 'package:path_provider/path_provider.dart';
+//import 'package:screenshot/screenshot.dart';
+import 'package:share/share.dart';
+import 'dart:async';
+import 'dart:ui' as ui;
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class WinnerScreen extends StatefulWidget {
   static String routeName = '/winnerbanner';
@@ -11,135 +23,150 @@ class WinnerScreen extends StatefulWidget {
 }
 
 class _WinnerScreenState extends State<WinnerScreen> {
+  static GlobalKey _repaintKey = GlobalKey();
+  File _image;
+  bool loadingScreenShot = false;
+  // ScreenshotController _screenshotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 80.0,
-          horizontal: 20.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                height: 50.0,
-                width: 50.0,
-                child: Image.asset(
-                  ImagesAsset.logo,
-                  fit: BoxFit.cover,
-                ),
-              ),
+      body: SafeArea(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: ColorPalettes.primaryGradientColor,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 40.0,
+              horizontal: 20.0,
             ),
-            SizedBox(
-              height: 200.0,
-              child: Image.asset(
-                ImagesAsset.winnerbanner,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Stack(
-              alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 150.0,
-                  width: 150.0,
-                  child: Image.asset(
-                    ImagesAsset.winnerborder,
-                    fit: BoxFit.cover,
+                RepaintBoundary(
+                  key: _repaintKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(width: 0.5, color: Colors.white70),
+                          ),
+                          height: 80.0,
+                          width: 80.0,
+                          child: Image.asset(
+                            ImagesAsset.logo,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200.0,
+                        child: Image.asset(
+                          ImagesAsset.winnerbanner,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            height: 150.0,
+                            width: 150.0,
+                            child: Image.asset(
+                              ImagesAsset.winnerborder,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 130.0,
+                            width: 130.0,
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundImage: AssetImage(
+                                ImagesAsset.profile,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: 130.0,
-                  width: 130.0,
-                  child: CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: AssetImage(
-                      ImagesAsset.profile,
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomBackButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
-                  ),
+                    CustomShareButton(
+                      onPressed: () {
+                        shareScreenshot();
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildCustomBackButton(onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-                _buildCustomShareButton(onPressed: null),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildCustomShareButton({Function onPressed}) {
-    return RawMaterialButton(
-      onPressed: onPressed,
-      fillColor: ColorPalettes.secondaryColor,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(
-              Icons.share_outlined,
-              color: Colors.white70,
-              size: 34.0,
-            ),
-            SizedBox(
-              width: 15.0,
-            ),
-            Text(
-              "Share",
-              maxLines: 1,
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18.0, fontFamily: 'Cairo'),
-            ),
-          ],
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
+  Future<Null> shareScreenshot() async {
+    setState(() {
+      loadingScreenShot = true;
+    });
+    try {
+      RenderRepaintBoundary boundary =
+          _repaintKey.currentContext.findRenderObject();
+      if (boundary.debugNeedsPaint) {
+        Timer(Duration(seconds: 1), () => shareScreenshot());
+        return null;
+      }
+      ui.Image image = await boundary.toImage();
+      final directory = (await getExternalStorageDirectory()).path;
+      ByteData byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData.buffer.asUint8List();
+      File imgFile = new File('$directory/screenshot.png');
+      imgFile.writeAsBytes(pngBytes);
+      final RenderBox box = context.findRenderObject();
+      Share.shareFiles([File('$directory/screenshot.png').path],
+          subject: 'Share ScreenShot',
+          text: 'Hello, check your share files!',
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+    } on PlatformException catch (e) {
+      print("Exception while taking screenshot:" + e.toString());
+    }
+    setState(() {
+      loadingScreenShot = false;
+    });
   }
-
-  Widget _buildCustomBackButton({Function onPressed}) {
-    return RawMaterialButton(
-      onPressed: onPressed,
-      fillColor: ColorPalettes.secondaryColor,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white70,
-              size: 34.0,
-            ),
-            SizedBox(
-              width: 15.0,
-            ),
-            Text(
-              "Back",
-              maxLines: 1,
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18.0, fontFamily: 'Cairo'),
-            ),
-          ],
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
-  }
+  // _image = await _screenshotController.capture(
+  //     pixelRatio: 2.0, delay: Duration(milliseconds: 10));
+  // final Uint8List bytes = _image.readAsBytesASync();
+  // await Share.file(
+  //     'Order Screenshot', 'ss.png', bytes.buffer.asUint8List(), 'image/png');
+  //     .then((image) async {
+  //   final directory = (await getApplicationDocumentsDirectory()).path;
+  //   Uint8List pngBytes = _imageFile.readAsBytesSync();
+  //   File imgFile = File('$directory/screenshot.png');
+  //   imgFile.writeAsBytes(pngBytes);
+  //   print('file saved in gallery');
+  //   await Share.file(
+  //       "Money App", "We have a winner here", pngBytes, 'image/png');
+  // }).catchError((onError) {
+  //   print(onError);
+  // });
 }

@@ -55,11 +55,18 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   Text(
                     AppLocalizations.of(context).otpHeader,
-                    style: ColorPalettes.lightHeaderTextStyle,
+                    style: TextStyle(
+                      color: ColorPalettes.appAccentColor,
+                      fontSize: 30.0,
+                      fontFamily: "Cairo",
+                    ),
                   ),
                   Text(
-                    AppLocalizations.of(context).otpGuideText,
+                    AppLocalizations.of(context).otpGuideText +
+                        loginModel.getProfile.mobileCountryCode +
+                        loginModel.getProfile.mobile,
                     style: ColorPalettes.bodyTextStyle,
+                    softWrap: true,
                   ),
                   buildTimer(),
                   OtpForm(),

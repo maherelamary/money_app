@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class AboutUsScreen extends StatelessWidget {
   static String routeName = '/about_us';
@@ -24,30 +25,30 @@ class AboutUsScreen extends StatelessWidget {
               horizontal: 20.0,
               vertical: 30.0,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'About Us',
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).aboutUsLabel,
                     style: TextStyle(
-                      color: Color(0xffFEB326),
+                      color: Colors.white70,
                       fontWeight: FontWeight.w500,
+                      fontFamily: "Cairo",
                       fontSize: 35.0,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 60.0,
-                ),
-                _buildRowData(text: line1),
-                _buildRowData(text: line2),
-                _buildRowData(text: line1),
-                _buildRowData(text: line2),
-                _buildRowData(text: line2),
-                _buildRowData(text: line1),
-              ],
+                  SizedBox(
+                    height: 60.0,
+                  ),
+                  _buildRowData(text: line1),
+                  _buildRowData(text: line2),
+                  _buildRowData(text: line1),
+                  _buildRowData(text: line2),
+                  _buildRowData(text: line2),
+                  _buildRowData(text: line1),
+                ],
+              ),
             ),
           ),
         ),

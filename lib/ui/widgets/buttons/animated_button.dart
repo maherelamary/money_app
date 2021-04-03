@@ -70,7 +70,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
           width: _containerWidth.value,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: ColorPalettes.secondaryColor,
+            color: ColorPalettes.appColor,
             borderRadius: BorderRadius.all(
               Radius.circular(50),
             ),

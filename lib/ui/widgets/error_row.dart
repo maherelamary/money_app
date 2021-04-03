@@ -9,7 +9,7 @@ Row buildErrorRow({String err}) => Row(
             ImagesAsset.errorIcon,
           ),
           size: 10.0,
-          color: ColorPalettes.primaryColor,
+          color: ColorPalettes.appBreakColor,
         ),
         SizedBox(
           width: 6.0,

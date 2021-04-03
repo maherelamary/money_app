@@ -230,7 +230,7 @@ class _OtpFormState extends State<OtpForm> {
                       msg: 'Please, Type a valid verification code',
                       toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.CENTER,
-                      backgroundColor: Colors.pink.shade400,
+                      backgroundColor: ColorPalettes.appAccentColor,
                       textColor: Colors.white,
                       fontSize: 15.0,
                     );
@@ -243,10 +243,11 @@ class _OtpFormState extends State<OtpForm> {
               width: 160.0,
               padding: EdgeInsets.all(10.0),
               decoration: ShapeDecoration(
-                color: ColorPalettes.primaryColor,
+                color: ColorPalettes.appAccentColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(new Radius.circular(40.0)),
-                  side: BorderSide(width: 1.0, color: ColorPalettes.lightColor),
+                  side: BorderSide(
+                      width: 1.0, color: ColorPalettes.appAccentColor),
                 ),
                 // side: new BorderSide(color: Colors.white)
               ),
@@ -270,7 +271,7 @@ class _OtpFormState extends State<OtpForm> {
                       width: 40,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ColorPalettes.lightColor.withOpacity(0.3),
+                        color: ColorPalettes.appColor,
                       ),
                       child: Icon(
                         Icons.arrow_forward_ios,
@@ -290,7 +291,7 @@ class _OtpFormState extends State<OtpForm> {
             AppLocalizations.of(context).sendCodeButtonLabel,
             style: TextStyle(
               decoration: TextDecoration.underline,
-              color: ColorPalettes.secondaryColor,
+              color: ColorPalettes.appAccentColor,
             ),
           ),
           SizedBox(

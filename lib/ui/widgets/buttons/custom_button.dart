@@ -17,8 +17,11 @@ class CustomButton extends StatelessWidget {
         gradient: ColorPalettes.primaryGradientColor,
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: ColorPalettes.primaryColor.withAlpha(100),
-              offset: Offset(2, 4),
+              color: ColorPalettes.appColor.withAlpha(100),
+              offset: Offset(
+                2,
+                4,
+              ),
               blurRadius: 8,
               spreadRadius: 2)
         ],

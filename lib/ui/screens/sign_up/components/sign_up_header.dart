@@ -3,6 +3,8 @@ import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import 'package:money_app/utils/images_asset.dart';
 
+import '../../../../utils/color_palettes.dart';
+
 class BuildSignUpHeader extends StatelessWidget {
   const BuildSignUpHeader({
     Key key,
@@ -27,7 +29,8 @@ class BuildSignUpHeader extends StatelessWidget {
           ),
           Text(
             AppLocalizations.of(context).signUpBodyText,
-            style: ColorPalettes.bodyTextStyle,
+            style: ColorPalettes.bodyTextStyle
+                .copyWith(color: ColorPalettes.appBreakColor),
             textAlign: TextAlign.center,
           ),
         ],
