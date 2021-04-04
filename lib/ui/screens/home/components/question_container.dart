@@ -27,10 +27,11 @@ class _QuestionContainerState extends State<QuestionContainer> {
               child: Text(
                 AppLocalizations.of(context).currentQuestionLabel,
                 style: TextStyle(
-                    fontSize: 14.0,
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w400,
-                    color: ColorPalettes.lightColor),
+                  fontSize: 14.0,
+                  fontFamily: 'Cairo',
+                  fontWeight: FontWeight.w400,
+                  color: ColorPalettes.appColor,
+                ),
               ),
             ),
             SizedBox(
@@ -114,7 +115,7 @@ class _QuestionContainerState extends State<QuestionContainer> {
                       ),
                     ),
                     IconButton(
-                      color: ColorPalettes.thirdColor,
+                      color: ColorPalettes.appColor,
                       icon: Icon(
                         Icons.send_outlined,
                         size: 20,

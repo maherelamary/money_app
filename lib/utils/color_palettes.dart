@@ -12,9 +12,6 @@ class ColorPalettes {
   static Color appAccentColor = Color(0xff7F58AF);
   static Color appBorderColor = Color(0xffFEB326);
   static Color appBreakColor = Color(0xff64C5EB);
-  static Color secondaryColor = Color(0xffb71e5f);
-  static Color thirdColor = Color(0xff36b4e6);
-  static Color lightColor = Color(0xffd31c5e);
   static Color textColor = Color(0xff696b6a);
   static Color borderColor = Color(0xffa0a2a0);
   //Some Static For style

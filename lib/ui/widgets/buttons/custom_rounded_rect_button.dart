@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/utils/color_palettes.dart';
 
-class CustomShareButton extends StatelessWidget {
+class CustomRoundedRectangleButton extends StatelessWidget {
+  final String buttonTitle;
   final Function onPressed;
-  const CustomShareButton({Key key, this.onPressed}) : super(key: key);
+  final IconData icon;
+  CustomRoundedRectangleButton({this.onPressed, this.buttonTitle, this.icon});
+
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
@@ -13,9 +16,9 @@ class CustomShareButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             Icon(
-              Icons.share_outlined,
+              icon,
               color: Colors.white70,
               size: 34.0,
             ),
@@ -23,21 +26,19 @@ class CustomShareButton extends StatelessWidget {
               width: 15.0,
             ),
             Text(
-              //AppLocalizations.of(context).shareWinnerProfileLabel,
-              "Share",
-              maxLines: 1,
+              buttonTitle,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
-                fontFamily: 'Cairo',
                 fontWeight: FontWeight.w500,
+                fontFamily: 'Cairo',
               ),
             ),
           ],
         ),
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(15),
       ),
     );
   }

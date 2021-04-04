@@ -3,8 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:money_app/ui/screens/winner/compoments/custom_back_button.dart';
-import 'package:money_app/ui/screens/winner/compoments/custom_share_button.dart';
+import 'package:money_app/ui/widgets/buttons/custom_rounded_rect_button.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
 import 'package:path_provider/path_provider.dart';
@@ -103,12 +102,16 @@ class _WinnerScreenState extends State<WinnerScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CustomBackButton(
+                    CustomRoundedRectangleButton(
+                      buttonTitle: "Back",
+                      icon: Icons.arrow_back_ios_rounded,
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
-                    CustomShareButton(
+                    CustomRoundedRectangleButton(
+                      buttonTitle: "Share",
+                      icon: Icons.share_sharp,
                       onPressed: () {
                         shareScreenshot();
                       },

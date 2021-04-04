@@ -15,6 +15,7 @@ import 'package:money_app/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/ui/screens/splash/splash_screen.dart';
 import 'package:money_app/ui/screens/winner/winner_screen.dart';
 import 'package:money_app/utils/color_palettes.dart';
+import 'package:money_app/utils/keyboard.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -54,75 +55,78 @@ class _MyAppState extends State<MyApp> {
           create: (context) => ChatModel(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Money App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          appBarTheme: AppBarTheme(
-            color: ColorPalettes.appAccentColor,
-            elevation: 2.0,
-            centerTitle: true,
+      child: GestureDetector(
+        onTap: () => KeyboardUtil.hideKeyboard(context),
+        child: MaterialApp(
+          title: 'Money App',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              color: ColorPalettes.appAccentColor,
+              elevation: 2.0,
+              centerTitle: true,
+            ),
+            brightness: Brightness.light,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          brightness: Brightness.light,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        supportedLocales: L10n.all,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        navigatorKey: navigatorKey,
-        initialRoute: LandScreen.routeName,
-        routes: routes,
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case '/sign_up':
-              return PageTransition(
-                child: SignUpScreen(),
-                type: PageTransitionType.rightToLeftWithFade,
-                settings: settings,
-                reverseDuration: Duration(milliseconds: 1000),
-                duration: Duration(milliseconds: 1000),
-                curve: Curves.fastOutSlowIn,
-              );
-              break;
-            case '/otp':
-              return PageTransition(
-                child: SignUpScreen(),
-                type: PageTransitionType.rightToLeftWithFade,
-                settings: settings,
-                reverseDuration: Duration(milliseconds: 1000),
-                duration: Duration(milliseconds: 1000),
-                curve: Curves.fastOutSlowIn,
-              );
-              break;
-            case '/home':
-              return PageTransition(
-                child: HomeScreen(),
-                type: PageTransitionType.rightToLeftWithFade,
-                settings: settings,
-                reverseDuration: Duration(milliseconds: 700),
-                duration: Duration(milliseconds: 700),
-                curve: Curves.easeInOutCubic,
-              );
-              break;
-            case '/winner':
-              return PageTransition(
-                child: WinnerScreen(),
-                type: PageTransitionType.bottomToTop,
-                settings: settings,
-                reverseDuration: Duration(milliseconds: 700),
-                duration: Duration(milliseconds: 700),
-                curve: Curves.fastOutSlowIn,
-              );
-              break;
+          supportedLocales: L10n.all,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          navigatorKey: navigatorKey,
+          initialRoute: SignInScreen.routeName,
+          routes: routes,
+          onGenerateRoute: (settings) {
+            switch (settings.name) {
+              case '/sign_up':
+                return PageTransition(
+                  child: SignUpScreen(),
+                  type: PageTransitionType.rightToLeftWithFade,
+                  settings: settings,
+                  reverseDuration: Duration(milliseconds: 1000),
+                  duration: Duration(milliseconds: 1000),
+                  curve: Curves.fastOutSlowIn,
+                );
+                break;
+              case '/otp':
+                return PageTransition(
+                  child: SignUpScreen(),
+                  type: PageTransitionType.rightToLeftWithFade,
+                  settings: settings,
+                  reverseDuration: Duration(milliseconds: 1000),
+                  duration: Duration(milliseconds: 1000),
+                  curve: Curves.fastOutSlowIn,
+                );
+                break;
+              case '/home':
+                return PageTransition(
+                  child: HomeScreen(),
+                  type: PageTransitionType.rightToLeftWithFade,
+                  settings: settings,
+                  reverseDuration: Duration(milliseconds: 700),
+                  duration: Duration(milliseconds: 700),
+                  curve: Curves.easeInOutCubic,
+                );
+                break;
+              case '/winner':
+                return PageTransition(
+                  child: WinnerScreen(),
+                  type: PageTransitionType.bottomToTop,
+                  settings: settings,
+                  reverseDuration: Duration(milliseconds: 700),
+                  duration: Duration(milliseconds: 700),
+                  curve: Curves.fastOutSlowIn,
+                );
+                break;
 
-            default:
-              return null;
-          }
-        },
+              default:
+                return null;
+            }
+          },
+        ),
       ),
     );
   }

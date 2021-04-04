@@ -83,6 +83,10 @@ class _SignUpFormState extends State<SignUpForm> {
                         ),
                       );
                     },
+                    initialSelection: "YE",
+                    onInit: (code) {
+                      countryCode = code.toString();
+                    },
                     onChanged: (code) {
                       countryCode = code.dialCode.toString();
                     },

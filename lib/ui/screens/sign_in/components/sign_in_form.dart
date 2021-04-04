@@ -4,6 +4,7 @@ import 'package:money_app/UI/screens/sign_up/otp_screen.dart';
 import 'package:money_app/UI/screens/sign_up/sign_up_screen.dart';
 import 'package:money_app/UI/widgets/login_input_decoration.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
+import 'package:money_app/ui/screens/sign_in/forgot_password_screen.dart';
 import 'package:money_app/ui/widgets/buttons/animated_button.dart';
 import 'package:money_app/ui/widgets/buttons/custom_button.dart';
 import 'package:money_app/ui/widgets/error_container.dart';
@@ -62,6 +63,7 @@ class _SignInFormState extends State<SignInForm> {
                     child: CountryCodePicker(
                       alignLeft: true,
                       showCountryOnly: true,
+                      initialSelection: "YE",
                       emptySearchBuilder: (context) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -75,6 +77,9 @@ class _SignInFormState extends State<SignInForm> {
                           ),
                         );
                       },
+                      onInit: (code) {
+                        countryCode = code.toString();
+                      },
                       onChanged: (code) {
                         print(code);
                         //reformattedCode = replaceCharAt(code.toString(), 0, "");
@@ -84,7 +89,10 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                   ),
                   Expanded(
-                    child: _buildPhoneFormField(),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: _buildPhoneFormField(),
+                    ),
                   ),
                 ],
               ),
@@ -97,34 +105,13 @@ class _SignInFormState extends State<SignInForm> {
                     width: 80,
                   ),
                   Expanded(
-                    child: _buildPasswordFormField(),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: _buildPasswordFormField(),
+                    ),
                   )
                 ],
               ),
-              // Row(
-              //   children: [
-              //     SizedBox(
-              //       width: 65,
-              //     ),
-              //     Container(
-              //       child: Checkbox(
-              //         value: _remember,
-              //         activeColor: ColorPalettes,
-              //         onChanged: (isRemembered) {
-              //           setState(
-              //             () {
-              //               _remember = isRemembered;
-              //             },
-              //           );
-              //         },
-              //       ),
-              //     ),
-              //     Text(
-              //       "Remember me",
-              //       style: ColorPalettes.bodyTextStyle,
-              //     ),
-              //   ],
-              // ),
             ],
           ),
           SizedBox(
@@ -183,6 +170,22 @@ class _SignInFormState extends State<SignInForm> {
             },
             child: CustomButton(
               title: AppLocalizations.of(context).signUp,
+            ),
+          ),
+          SizedBox(
+            height: 8.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+            },
+            child: Text(
+              "Forgot password",
+              style: TextStyle(
+                  fontFamily: "Cairo",
+                  fontWeight: FontWeight.w300,
+                  fontSize: 14.0,
+                  decoration: TextDecoration.underline),
             ),
           ),
           SizedBox(

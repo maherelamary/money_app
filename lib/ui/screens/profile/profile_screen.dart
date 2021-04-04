@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:money_app/ui/screens/profile/components/app_bar.dart';
-import 'package:money_app/ui/screens/profile/components/edit_profile_screen.dart';
+import 'package:money_app/ui/screens/profile/edit_profile_screen.dart';
 import 'package:money_app/ui/screens/profile/components/profile_list_item.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
-
 import 'package:money_app/ui/screens/profile/help_support.dart';
+
 import 'package:money_app/ui/screens/profile/terms_conditions.dart';
 import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 

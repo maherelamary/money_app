@@ -7,7 +7,7 @@ Container buildTimer() => Container(
         duration: Duration(seconds: 100),
         builder: (_, value, child) => Text(
           "00:${value.toInt()}",
-          style: TextStyle(color: ColorPalettes.lightColor),
+          style: TextStyle(color: ColorPalettes.appColor),
         ),
       ),
     );

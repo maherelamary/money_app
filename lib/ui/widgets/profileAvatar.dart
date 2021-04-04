@@ -88,7 +88,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                   title: Text(AppLocalizations.of(context).galleryButton),
                   leading: Icon(
                     Icons.camera,
-                    color: ColorPalettes.thirdColor,
+                    color: ColorPalettes.appBreakColor,
                   ),
                 ),
               ),
@@ -109,7 +109,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                   title: Text(AppLocalizations.of(context).cameraButton),
                   leading: Icon(
                     Icons.camera_alt,
-                    color: ColorPalettes.thirdColor,
+                    color: ColorPalettes.appBreakColor,
                   ),
                 ),
               ),
