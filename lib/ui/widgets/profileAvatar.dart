@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
@@ -8,19 +10,27 @@ import 'package:money_app/utils/sizes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class ProfileAvatar extends StatefulWidget {
-  ProfileAvatar({Key key}) : super(key: key);
+  final bool editable;
+  final ValueChanged<File> onChanged;
+  ProfileAvatar({
+    Key key,
+    this.editable = false,
+    this.onChanged,
+  }) : super(key: key);
   @override
   _ProfileAvatarState createState() => _ProfileAvatarState();
 }
 
 class _ProfileAvatarState extends State<ProfileAvatar> {
-  PickedFile _imageFile;
+  File _imageFile;
+
   final ImagePicker _picker = ImagePicker();
 
   void chooseImage(ImageSource source) async {
     final pickedImageFile = await _picker.getImage(source: source);
     setState(() {
-      _imageFile = pickedImageFile;
+      _imageFile = File(pickedImageFile.path);
+      widget.onChanged(_imageFile);
     });
   }
 
@@ -36,24 +46,26 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                     ImagesAsset.profile,
                   )
                 : FileImage(
-                    File(_imageFile.path),
+                    _imageFile,
                   ),
           ),
-          Positioned(
-            bottom: 0.0,
-            right: 0.0,
-            child: IconButton(
-                icon: Icon(
-                  Icons.camera_alt,
-                  size: 30.0,
-                  color: Colors.white60,
-                ),
-                onPressed: () => showModalBottomSheet(
-                      context: context,
-                      builder: ((builder) => _imageSelectorBottomSheet()),
-                    ) //TODO_openImageSelector,
-                ),
-          ),
+          widget.editable
+              ? Positioned(
+                  bottom: 0.0,
+                  right: 0.0,
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.camera_alt,
+                        size: 30.0,
+                        color: Colors.white60,
+                      ),
+                      onPressed: () => showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) => _imageSelectorBottomSheet()),
+                          ) //TODO_openImageSelector,
+                      ),
+                )
+              : Container(height: 0.0, width: 0.0),
         ],
       ),
     );
@@ -171,4 +183,19 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
       ),
     );
   }
+}
+
+Future uploadImageFileToStorage({File imageToUpload}) async {
+  String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+  final storageRef =
+      FirebaseStorage.instance.ref().child('moneyApp').child(fileName);
+  final task = await storageRef.putFile(imageToUpload);
+  await task.ref.getDownloadURL().then((downloadedUrl) {
+    //widget.onChanged(downloadedUrl.toString());
+    print("_imageUrl => ${downloadedUrl}");
+    return downloadedUrl.toString();
+  }, onError: (err) {
+    print('Err' + err);
+    Fluttertoast.showToast(msg: 'This file is not an image');
+  });
 }

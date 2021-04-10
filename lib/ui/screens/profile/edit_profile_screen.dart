@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/core/model/user.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/screens/profile/components/app_bar.dart';
 import 'package:money_app/ui/widgets/custom_suffix_icon.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/ui/widgets/rounded_rect_input_decoration.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
@@ -21,11 +25,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   String password = "";
   String conformPass = "";
-  // String countryCode = "";
-  // String phone = "";
+  String countryCode = "";
+  String phone = "";
   String username = "";
   String fullName = "";
+  String imageUrl = "";
   User _user;
+
+  File _imageFile;
 
   final List<String> errors = [];
 
@@ -80,7 +87,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          ProfileAppBar(),
+          ProfileAppBar(
+            onChanged: (imgFile) {
+              _imageFile = imgFile;
+            },
+          ),
           Form(
             key: _formKey,
             child: Container(
@@ -186,9 +197,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     SizedBox(height: 70.0),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         if (_formKey.currentState.validate()) {
                           print('form valid');
+                          if (_imageFile != null) {
+                            await uploadImageFileToStorage(
+                                    imageToUpload: _imageFile)
+                                .then((downloadedUrl) {
+                              print(downloadedUrl.toString());
+                              imageUrl = downloadedUrl;
+                              print(imageUrl);
+                            }).catchError(() {
+                              Fluttertoast.showToast(
+                                msg: "Unable to upload image",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                              );
+                              return;
+                            });
+                          }
                         } else {
                           showAlertDialog(context);
                           print('form not valid');
@@ -260,7 +287,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   TextFormField buildPasswordFormField() => TextFormField(
         keyboardType: TextInputType.name,
-        initialValue: loginModel.getUser.profile.password,
+        obscureText: true,
         onSaved: (newValue) => password = newValue,
         onChanged: (value) {
           if (value.isNotEmpty) {
@@ -297,7 +324,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   TextFormField buildConfirmPasswordFormField() => TextFormField(
         keyboardType: TextInputType.text,
-        initialValue: loginModel.getUser.profile.conformPassword,
+        obscureText: true,
         onSaved: (newValue) => conformPass = newValue,
         onChanged: (value) {
           if (value.isNotEmpty) {

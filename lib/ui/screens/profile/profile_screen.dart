@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/core/local_storage.dart';
 import 'package:money_app/ui/screens/profile/components/app_bar.dart';
 import 'package:money_app/ui/screens/profile/edit_profile_screen.dart';
 import 'package:money_app/ui/screens/profile/components/profile_list_item.dart';
@@ -112,6 +113,7 @@ class ProfileListItems extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
+              LocalStorage().clearUserFromLocalStorage();
               Navigator.pushNamed(context, SignInScreen.routeName);
             },
             child: ProfileListItem(

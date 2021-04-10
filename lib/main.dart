@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:money_app/core/local_storage.dart';
 import 'package:money_app/core/model/notification.dart';
+import 'package:money_app/core/model/user.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/l10n/l10n.dart';
@@ -19,6 +21,7 @@ import 'package:money_app/utils/keyboard.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ui/screens/splash/splash_screen.dart';
 
@@ -36,11 +39,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Future<User> _user;
   FirebaseMessaging _messaging = FirebaseMessaging();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.delayed(Duration.zero, () {
+      _user = LocalStorage().loadUserFromLocalStorage();
+    });
     registerNotification();
   }
 
@@ -77,7 +84,8 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           navigatorKey: navigatorKey,
-          initialRoute: SignInScreen.routeName,
+          initialRoute:
+              _user != null ? LandScreen.routeName : SignInScreen.routeName,
           routes: routes,
           onGenerateRoute: (settings) {
             switch (settings.name) {

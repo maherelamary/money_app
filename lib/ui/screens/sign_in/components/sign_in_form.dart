@@ -173,7 +173,7 @@ class _SignInFormState extends State<SignInForm> {
             ),
           ),
           SizedBox(
-            height: 8.0,
+            height: 15.0,
           ),
           GestureDetector(
             onTap: () {
@@ -182,10 +182,12 @@ class _SignInFormState extends State<SignInForm> {
             child: Text(
               "Forgot password",
               style: TextStyle(
-                  fontFamily: "Cairo",
-                  fontWeight: FontWeight.w300,
-                  fontSize: 14.0,
-                  decoration: TextDecoration.underline),
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.w400,
+                fontSize: 14.0,
+                color: ColorPalettes.appBreakColor,
+                //decoration: TextDecoration.underline,
+              ),
             ),
           ),
           SizedBox(
@@ -232,6 +234,7 @@ class _SignInFormState extends State<SignInForm> {
 
   Widget _buildPasswordFormField() => TextFormField(
         keyboardType: TextInputType.text,
+        obscureText: true,
         onSaved: (value) {
           password = value;
         },

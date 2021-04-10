@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:money_app/core/model/user.dart';
 import 'package:money_app/main.dart';
 import 'package:money_app/ui/screens/chat/chat_screen.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
@@ -21,7 +20,6 @@ class _LandScreenState extends State<LandScreen> {
   final List<Widget> screens = [
     HomeScreen(),
     ChatScreen(),
-    //WinnerScreen(),
     ProfileScreen(),
     SettingsScreen(),
   ];

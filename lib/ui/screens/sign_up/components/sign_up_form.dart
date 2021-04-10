@@ -248,6 +248,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildPasswordFormField() => TextFormField(
         keyboardType: TextInputType.name,
+        obscureText: true,
         onSaved: (newValue) => password = newValue,
         onChanged: (value) {
           if (value.isNotEmpty) {
@@ -285,6 +286,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildConfirmPasswordFormField() => TextFormField(
         keyboardType: TextInputType.text,
+        obscureText: true,
         onSaved: (newValue) => conformPass = newValue,
         onChanged: (value) {
           if (value.isNotEmpty) {

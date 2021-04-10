@@ -1,59 +1,3 @@
-// class User {
-//   int id;
-//   String firstName;
-//   String middleName;
-//   String lastName;
-//   String mobile;
-//   String mobileCountryCode;
-//   bool isMobileVerified;
-//   String displayName;
-//   String password;
-//   String profilePath;
-//   String createdDate;
-//   String token;
-//   String refreshToken;
-//   User({
-//     this.id,
-//     this.displayName,
-//     this.firstName,
-//     this.middleName,
-//     this.lastName,
-//     this.mobile,
-//     this.isMobileVerified,
-//     this.mobileCountryCode,
-//     this.password,
-//     this.profilePath,
-//     this.createdDate,
-//     this.token,
-//     this.refreshToken,
-//   });
-//   factory User.fromJson(Map<String, dynamic> json) {
-//     return User(
-//       id: json['id'] ?? 0,
-//       token: json['token'] ?? "",
-//       refreshToken: json['refreshToken'] ?? "",
-//       displayName: json['displayName'] ?? "",
-//       firstName: json['firstName'] ?? "",
-//       middleName: json['middleName'] ?? "",
-//       lastName: json['lastName'] ?? "",
-//       mobile: json['mobile'] ?? "",
-//       isMobileVerified: json['isMobileVerified'] ?? false,
-//       mobileCountryCode: json['mobileCountryCode'] ?? "",
-//       password: json['password'] ?? "",
-//       profilePath: json['profilePicture'] ?? "",
-//       createdDate: json['createdDateTime'] ?? "",
-//     );
-//   }
-//   Map<String, dynamic> toJson() => {
-//         "displayName": displayName,
-//         "firstName": firstName,
-//         "middleName": middleName,
-//         "lastName": lastName,
-//         "mobile": mobile,
-//         "mobileCountryCode": mobileCountryCode,
-//         "password": password,
-//       };
-// }
 class User {
   User({
     this.token,
@@ -100,8 +44,8 @@ class Profile {
     //this.pictureFormat,
     this.otp,
     this.id,
-    this.password,
-    this.conformPassword,
+    // this.password,
+    // this.conformPassword,
     // this.createdDateTime,
     // this.status,
   });
@@ -113,8 +57,8 @@ class Profile {
   String firstName;
   String middleName;
   String lastName;
-  String password;
-  String conformPassword;
+  // String password;
+  // String conformPassword;
   int gender;
   String country;
   String countryCode;
@@ -154,8 +98,8 @@ class Profile {
         //pictureFormat: json["pictureFormat"],
         otp: json["otp"],
         id: json["id"],
-        password: json["password"],
-        conformPassword: json["conform_password"],
+        // password: json["password"],
+        // conformPassword: json["conform_password"],
         //createdDateTime: DateTime.parse(json["createdDateTime"]),
         //status: json["status"],
       );
@@ -178,8 +122,8 @@ class Profile {
         "profilePicture": profilePicture,
         "displayName": displayName,
         "role": role,
-        "password": password,
-        "conform_password": conformPassword,
+        // "password": password,
+        // "conform_password": conformPassword,
         //"picture": picture,
         //"pictureFormat": pictureFormat,
         //"otp": otp,

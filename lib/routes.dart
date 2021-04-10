@@ -11,6 +11,7 @@ import 'package:money_app/ui/screens/settings/agants.dart';
 import 'package:money_app/ui/screens/settings/contact_us.dart';
 import 'package:money_app/ui/screens/settings/settings_screen.dart';
 import 'package:money_app/ui/screens/settings/winner_board.dart';
+import 'package:money_app/ui/screens/sign_in/components/new_password.dart';
 import 'package:money_app/ui/screens/sign_in/forgot_password_screen.dart';
 import 'package:money_app/ui/screens/winner/prize.dart';
 import 'package:money_app/ui/screens/winner/winner_screen.dart';
@@ -44,4 +45,5 @@ final Map<String, WidgetBuilder> routes = {
   EditProfileScreen.routeName: (context) => EditProfileScreen(),
   TimeIsOverScreen.routeName: (context) => TimeIsOverScreen(),
   ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+  NewPasswordContainer.routeName: (context) => NewPasswordContainer(),
 };

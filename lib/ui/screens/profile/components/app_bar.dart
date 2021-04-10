@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/utils/color_palettes.dart';
@@ -5,6 +6,9 @@ import 'package:money_app/utils/images_asset.dart';
 
 class ProfileAppBar extends StatefulWidget {
   @override
+  final ValueChanged<File> onChanged;
+  ProfileAppBar({Key key, this.onChanged}) : super(key: key);
+
   _ProfileAppBarState createState() => _ProfileAppBarState();
 }
 
@@ -44,7 +48,12 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
             // child: ClipOval(
             //   child: Image.asset(ImagesAsset.profile),
             // ),
-            child: ProfileAvatar(),
+            child: ProfileAvatar(
+              editable: true,
+              onChanged: (imgFile) {
+                widget.onChanged(imgFile);
+              },
+            ),
           ),
         ),
       ],
