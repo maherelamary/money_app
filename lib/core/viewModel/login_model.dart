@@ -140,6 +140,57 @@ class LoginModel extends ChangeNotifier {
     });
   }
 
+  //Resend OTP if mobile not verified yet
+  void resendOtpWithMobile({String mobileWithCode}) async {
+    print(mobileWithCode);
+    await authenticationServices
+        .resendOtpWithMobile(codeConcatenateMobile: mobileWithCode)
+        .then((response) {
+      _errorMessages.clear();
+      final data = jsonDecode(response.body);
+      print('data Retrieved ${data}');
+      if (data['success'] == true &&
+          data['errors'] == null &&
+          data['result'] != null) {
+        print(data['result']);
+        Profile newProfile = Profile.fromJson(data['result']);
+        //print(profile.token);
+        setProfile(newProfile);
+        setLoading(false);
+
+        print(_profile.isMobileVerified);
+        print(_profile.userName);
+        print(_profile.mobile);
+        print('hhhhhhhhh');
+        //navigatorKey.currentState.pushNamed(LandScreen.routeName);
+      } else if (data['success'] == false && data['errors'] != null) {
+        _errorMessages.clear();
+        data['errors'].forEach((err) {
+          print(data['errors']);
+          print(err["description"]);
+          _errorMessages.add(err['description']);
+          Fluttertoast.showToast(
+            msg: _errorMessages.first,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.pink.shade400,
+            textColor: Colors.white,
+            fontSize: 15.0,
+          );
+        });
+      } else {
+        Fluttertoast.showToast(
+          msg: "Failed to verify your mobile",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.pink.shade400,
+          textColor: Colors.white,
+          fontSize: 15.0,
+        );
+      }
+    });
+  }
+
   //LOGIN PROVIDER
   void loginWithMobile({Map registerData}) async {
     registerData.forEach((_, value) {

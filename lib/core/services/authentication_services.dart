@@ -7,9 +7,11 @@ class AuthenticationServices {
   static String registerMobile = 'v1/identity/RegisterMobile';
   static String loginMobile = 'v1/identity/login';
   static String verifyMobile = 'v1/identity/verifymobile';
+  static String resendOtp = 'v1/identity/ResendOTP';
   static String registerMobileEndpoint = ApiConfig.baseApiUrl + registerMobile;
   static String loginMobileEndpoint = ApiConfig.baseApiUrl + loginMobile;
   static String verifyMobileEndpoint = ApiConfig.baseApiUrl + verifyMobile;
+  static String resendOtpEndpoint = ApiConfig.baseApiUrl + resendOtp;
 
   Future<http.Response> registerWithMobile(Map<String, dynamic> body) async {
     print('Url => $registerMobileEndpoint');
@@ -39,6 +41,24 @@ class AuthenticationServices {
     print('Url => $verifyMobileEndpoint');
     return await http.post(
       verifyMobileEndpoint,
+      headers: {
+        //'authorization': auth,
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body),
+    );
+  }
+
+  Future<http.Response> resendOtpWithMobile(
+      {String codeConcatenateMobile}) async {
+    print('Url => $verifyMobileEndpoint');
+    Map<String, dynamic> body = {
+      "memberId": 0,
+      "code": "",
+      "mobile": codeConcatenateMobile
+    };
+    return await http.post(
+      resendOtpEndpoint,
       headers: {
         //'authorization': auth,
         'Content-Type': 'application/json',

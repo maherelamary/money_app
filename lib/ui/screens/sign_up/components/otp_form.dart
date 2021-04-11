@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/UI/widgets/otp_input_decoration.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
+import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class OtpForm extends StatefulWidget {
-  const OtpForm({
+  final bool validate;
+  OtpForm({
     Key key,
+    @required this.validate,
   }) : super(key: key);
 
   @override
@@ -39,6 +42,9 @@ class _OtpFormState extends State<OtpForm> {
     pin4FocusNode = FocusNode();
     pin5FocusNode = FocusNode();
     pin6FocusNode = FocusNode();
+
+    //Warm up local_notification
+    //initializeNotification();
   }
 
   @override
@@ -287,11 +293,26 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(
             height: 15.0,
           ),
-          Text(
-            AppLocalizations.of(context).sendCodeButtonLabel,
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-              color: ColorPalettes.appAccentColor,
+          GestureDetector(
+            onTap: () async {
+              if (widget.validate) {
+                if (loginModel.getProfile != null) {
+                  var mobile = loginModel.getProfile.mobile;
+                  var countryCode = loginModel.getProfile.mobileCountryCode;
+                  var phone = countryCode.toString() + mobile.toString();
+                  loginModel.resendOtpWithMobile(mobileWithCode: phone);
+                  showNotificationWithSound(body: loginModel.getProfile.otp);
+                }
+              } else {
+                print("time not ended yet");
+              }
+            },
+            child: Text(
+              AppLocalizations.of(context).sendCodeButtonLabel,
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: ColorPalettes.appAccentColor,
+              ),
             ),
           ),
           SizedBox(

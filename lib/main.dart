@@ -84,8 +84,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           navigatorKey: navigatorKey,
-          initialRoute:
-              _user != null ? LandScreen.routeName : LandScreen.routeName,
+          initialRoute: SignInScreen.routeName,
           routes: routes,
           onGenerateRoute: (settings) {
             switch (settings.name) {

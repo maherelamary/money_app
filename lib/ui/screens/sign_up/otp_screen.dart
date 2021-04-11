@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:money_app/UI/screens/sign_up/components/otp_form.dart';
-import 'package:money_app/UI/widgets/otp_timer.dart';
+
 import 'package:money_app/core/viewModel/login_model.dart';
+import 'package:money_app/ui/widgets/otp_timer.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 class OtpScreen extends StatefulWidget {
   static String routeName = "/otp";
@@ -17,7 +20,9 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  bool _validate = false;
+  String _timerValue;
+
   bool showNotification = true;
   LoginModel loginModel = LoginModel();
 
@@ -34,7 +39,7 @@ class _OtpScreenState extends State<OtpScreen> {
     if (showNotification && loginModel.getOTP()) {
       print('Otp notifications');
       Future.delayed(Duration.zero, () {
-        showNotificationWithSound();
+        showNotificationWithSound(body: loginModel.getProfile.otp);
       });
       setState(() {
         print('otp connections');
@@ -68,8 +73,17 @@ class _OtpScreenState extends State<OtpScreen> {
                     style: ColorPalettes.bodyTextStyle,
                     softWrap: true,
                   ),
-                  buildTimer(),
-                  OtpForm(),
+                  BuildTimer(
+                    timerHasEnded: (val) {
+                      print("Hi+${val}");
+                      setState(() {
+                        _validate = val;
+                      });
+                    },
+                  ),
+                  OtpForm(
+                    validate: _validate,
+                  ),
                   SizedBox(
                     height: Sizes.dp30(context),
                   ),
@@ -81,65 +95,62 @@ class _OtpScreenState extends State<OtpScreen> {
       ),
     );
   }
+}
 
-  void initializeNotification() async {
-    try {
-      flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      var initializationSettingsAndroid =
-          AndroidInitializationSettings('@mipmap/ic_launcher');
-      var initializationSettingsIOS = IOSInitializationSettings(
-          // requestSoundPermission: true,
-          // requestBadgePermission: true,
-          // requestAlertPermission: true,
-          // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-          );
-      final InitializationSettings initializationSettings =
-          InitializationSettings(
-        android: initializationSettingsAndroid,
-        iOS: initializationSettingsIOS,
-      );
-      await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-          onSelectNotification: didSelectNotification);
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  showNotificationWithSound() async {
-    const IOSNotificationDetails iOSPlatformChannelSpecifics =
-        IOSNotificationDetails();
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'your channel id',
-      'your channel name',
-      'your channel description',
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      sound: RawResourceAndroidNotificationSound('loud_alert'),
+void initializeNotification() async {
+  try {
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings(
+        // requestSoundPermission: true,
+        // requestBadgePermission: true,
+        // requestAlertPermission: true,
+        // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+        );
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
     );
-
-    NotificationDetails platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'Your verification Code',
-      loginModel.getProfile.otp,
-      platformChannelSpecifics,
-      payload: 'OTP-Code',
-    );
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: didSelectNotification);
+  } catch (e) {
+    print(e.toString());
   }
+}
 
-  Future didSelectNotification(String payload) async {
-    if (payload != null) {
-      debugPrint('notification payload: $payload');
-    }
-  }
+showNotificationWithSound({String body}) async {
+  const IOSNotificationDetails iOSPlatformChannelSpecifics =
+      IOSNotificationDetails();
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+          'your channel id', 'your channel name', 'your channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+          playSound: true,
+          sound: RawResourceAndroidNotificationSound('loud_alert'));
 
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    print("recieved forground notification from iOS");
+  NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+    0,
+    'Your verification Code',
+    body,
+    platformChannelSpecifics,
+    payload: 'OTP-Code',
+  );
+}
+
+Future didSelectNotification(String payload) async {
+  if (payload != null) {
+    debugPrint('notification payload: $payload');
   }
+}
+
+Future onDidReceiveLocalNotification(
+    int id, String title, String body, String payload) async {
+  print("recieved forground notification from iOS");
 }
