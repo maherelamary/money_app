@@ -27,4 +27,5 @@ class ImagesAsset {
   static String prizeIcon = "assets/img/prize_icon.png";
   static String wreathIcon = "assets/img/wreath.png";
   static String timeOver = "assets/img/time_over.png";
+  static String heartsIcon = "assets/img/hearts.png";
 }

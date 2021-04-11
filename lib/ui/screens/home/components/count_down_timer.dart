@@ -32,10 +32,12 @@ class _CountDownTimerState extends State<CountDownTimer>
   Duration playerDuration;
 
   playTickTock() async {
-    player = await cache.play('audio/ticktock.mp3');
+    print("player = await cache.play('audio/ticktock.mp3')");
+    //player = await cache.play('audio/ticktock.mp3');
   }
 
   stopTickTock() async {
+    print("player = await cache.play('audio/ticktock.mp3')");
     await player.stop();
   }
 

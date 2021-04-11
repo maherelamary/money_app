@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             appBarTheme: AppBarTheme(
-              color: ColorPalettes.appAccentColor,
+              color: Colors.white,
               elevation: 2.0,
               centerTitle: true,
             ),
@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
           ],
           navigatorKey: navigatorKey,
           initialRoute:
-              _user != null ? LandScreen.routeName : SignInScreen.routeName,
+              _user != null ? LandScreen.routeName : LandScreen.routeName,
           routes: routes,
           onGenerateRoute: (settings) {
             switch (settings.name) {

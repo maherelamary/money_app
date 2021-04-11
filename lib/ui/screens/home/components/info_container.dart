@@ -41,6 +41,7 @@ class _InfoContainerState extends State<InfoContainer> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       AppLocalizations.of(context).pointsLabel,
@@ -50,11 +51,14 @@ class _InfoContainerState extends State<InfoContainer> {
                         color: Colors.blueGrey,
                       ),
                     ),
-                    Image.asset(
-                      ImagesAsset.pointsIcon,
-                      width: 25.0,
-                      height: 25.0,
-                      fit: BoxFit.fill,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Image.asset(
+                        ImagesAsset.pointsIcon,
+                        width: 20.0,
+                        height: 20.0,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ],
                 ),
@@ -92,8 +96,8 @@ class _InfoContainerState extends State<InfoContainer> {
                     ),
                     Image.asset(
                       ImagesAsset.timerIcon,
-                      width: 25.0,
-                      height: 25.0,
+                      width: 20.0,
+                      height: 20.0,
                       fit: BoxFit.fill,
                     ),
                   ],
