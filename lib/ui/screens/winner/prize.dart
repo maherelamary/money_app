@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/core/model/quiz.dart';
+import 'package:money_app/core/viewModel/quiz_model.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/images_asset.dart';
+import 'package:provider/provider.dart';
 
 class PrizeScreen extends StatelessWidget {
   static String routeName = '/prize';
+
+  QuizModel quizModel = QuizModel();
   @override
   Widget build(BuildContext context) {
+    quizModel = Provider.of<QuizModel>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white70,
@@ -40,7 +46,20 @@ class PrizeScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Laptop Dell E34245',
+                  quizModel.getQuiz != null
+                      ? quizModel.getQuiz.quizPrizeDisplayNameEn
+                      : "NON-NAMED",
+                  style: TextStyle(
+                    fontFamily: 'Cairo',
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontSize: 25.0,
+                  ),
+                ),
+                Text(
+                  quizModel.getQuiz != null
+                      ? quizModel.getQuiz.quizPrizeDisplayNameAr
+                      : "",
                   style: TextStyle(
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w500,
@@ -57,7 +76,9 @@ class PrizeScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '15,000 Dollars',
+                  quizModel.getQuiz != null
+                      ? quizModel.getQuiz.quizPrizeAmount.toString()
+                      : "",
                   style: TextStyle(
                     fontFamily: 'Changa',
                     color: ColorPalettes.appBorderColor,
@@ -68,7 +89,8 @@ class PrizeScreen extends StatelessWidget {
                 SingleChildScrollView(
                   child: Container(
                     child: Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing',
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type setting',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'Cairo',
                         color: Colors.grey.shade500,

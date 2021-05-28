@@ -54,25 +54,4 @@ class ChatModel extends ChangeNotifier {
     }
     return input;
   }
-
-  // Future<void> getMessage() async {
-  //   _messageDatabaseReference.onChildAdded.listen((event) async {
-  //     Map<dynamic, dynamic> result =
-  //         (await _all_messages.child(event.snapshot.key).once()).value;
-  //
-  //     setState(() {
-  //       lists.add(result);
-  //       lists
-  //         ..sort((a, b) => DateTime.parse(replaceFarsiNumber(b['Message_Time']
-  //             .toString()
-  //             .replaceAll("ص", "")
-  //             .replaceAll("م", "")))
-  //             .compareTo(DateTime.parse(replaceFarsiNumber(a['Message_Time']
-  //             .toString()
-  //             .replaceAll("ص", "")
-  //             .replaceAll("م", "")))));
-  //     });
-  //   });
-  //   print("Listssss " + lists.length.toString());
-  // }
 }

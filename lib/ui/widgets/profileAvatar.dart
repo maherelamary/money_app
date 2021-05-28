@@ -23,7 +23,6 @@ class ProfileAvatar extends StatefulWidget {
 
 class _ProfileAvatarState extends State<ProfileAvatar> {
   File _imageFile;
-
   final ImagePicker _picker = ImagePicker();
 
   void chooseImage(ImageSource source) async {
@@ -76,13 +75,13 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
       height: 150.0,
       width: Sizes.width(context),
       margin: EdgeInsets.only(
-        left: 25.0,
-        right: 25.0,
+        left: 20.0,
+        right: 20.0,
         top: 20.0,
         bottom: 10.0,
       ),
       decoration: BoxDecoration(
-        color: ColorPalettes.appColor.withOpacity(0.5),
+        color: ColorPalettes.appAccentColor.withOpacity(0.2),
         borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       ),
       child: Center(

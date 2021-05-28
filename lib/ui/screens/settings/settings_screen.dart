@@ -14,6 +14,7 @@ import 'package:money_app/utils/images_asset.dart';
 
 class SettingsScreen extends StatefulWidget {
   static String routeName = '/settings';
+  SettingsScreen({Key key}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();

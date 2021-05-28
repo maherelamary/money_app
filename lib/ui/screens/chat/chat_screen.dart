@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/ui/screens/chat/components/message_wall.dart';
 import 'package:money_app/ui/screens/chat/components/send_message.dart';
+import 'package:money_app/utils/color_palettes.dart';
 
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   static String routeName = "/chat";
+  ChatScreen({Key key}) : super(key: key);
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -32,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Text(
           'Chatting',
           style: TextStyle(
-            color: Colors.white38,
+            color: ColorPalettes.appAccentColor,
           ),
         ),
       ),

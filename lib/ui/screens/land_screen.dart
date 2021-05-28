@@ -18,10 +18,10 @@ class LandScreen extends StatefulWidget {
 class _LandScreenState extends State<LandScreen> {
   int currentTab = 0;
   final List<Widget> screens = [
-    HomeScreen(),
-    ChatScreen(),
-    ProfileScreen(),
-    SettingsScreen(),
+    HomeScreen(key: PageStorageKey("Home")),
+    ChatScreen(key: PageStorageKey("chat")),
+    ProfileScreen(key: PageStorageKey("profile")),
+    SettingsScreen(key: PageStorageKey("settings")),
   ];
 
   Widget currentScreen = HomeScreen();
@@ -30,16 +30,17 @@ class _LandScreenState extends State<LandScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white70,
-          elevation: 3.0,
-          child: Image.asset(
-            ImagesAsset.cupIcon,
-            fit: BoxFit.cover,
-            width: 30.0,
-            height: 30.0,
-          ),
-          onPressed: () =>
-              navigatorKey.currentState.pushNamed(WinnerScreen.routeName)),
+        backgroundColor: Colors.white70,
+        elevation: 3.0,
+        child: Image.asset(
+          ImagesAsset.cupIcon,
+          fit: BoxFit.cover,
+          width: 30.0,
+          height: 30.0,
+        ),
+        onPressed: () =>
+            navigatorKey.currentState.pushNamed(WinnerScreen.routeName),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: PageStorage(
         bucket: bucket,

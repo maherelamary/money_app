@@ -7,7 +7,9 @@ import 'package:money_app/utils/images_asset.dart';
 class ProfileAppBar extends StatefulWidget {
   @override
   final ValueChanged<File> onChanged;
-  ProfileAppBar({Key key, this.onChanged}) : super(key: key);
+  final bool toEdit;
+  ProfileAppBar({Key key, this.onChanged, this.toEdit = false})
+      : super(key: key);
 
   _ProfileAppBarState createState() => _ProfileAppBarState();
 }
@@ -49,7 +51,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
             //   child: Image.asset(ImagesAsset.profile),
             // ),
             child: ProfileAvatar(
-              editable: true,
+              editable: widget.toEdit ? true : false,
               onChanged: (imgFile) {
                 widget.onChanged(imgFile);
               },

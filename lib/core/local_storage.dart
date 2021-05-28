@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:money_app/core/model/user.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
   saveUser({User user}) async {
-    Map<String, dynamic> mappedUserData = User().toJson();
+    print("init saveUser");
+    Map<String, dynamic> mappedUserData = user.toJson();
+    print(mappedUserData);
     String encodedUserData = jsonEncode(user);
+    print(encodedUserData);
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('userData', encodedUserData);
@@ -19,18 +23,18 @@ class LocalStorage {
     }
   }
 
-  Future<User> loadUserFromLocalStorage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<User> loadUser() async {
     try {
+      print("init loadUser");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       String encodedUserMap = prefs.getString('userData');
-      Map mappedUser = jsonDecode(encodedUserMap);
+      Map mappedUser = json.decode(encodedUserMap);
       User user = User.fromJson(mappedUser);
       print("User => ${user}");
       return user;
     } catch (err) {
-      print(
-        'Unable to load user data'.toUpperCase() + err.toString(),
-      );
+      print('Unable to load user data'.toUpperCase() + err.toString());
+      return null;
     }
   }
 

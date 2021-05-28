@@ -5,8 +5,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:money_app/core/local_storage.dart';
 import 'package:money_app/core/model/notification.dart';
 import 'package:money_app/core/model/user.dart';
+import 'package:money_app/core/services/local_notification_services.dart';
 import 'package:money_app/core/viewModel/chat_model.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
+import 'package:money_app/core/viewModel/quiz_model.dart';
 import 'package:money_app/l10n/l10n.dart';
 import 'package:money_app/routes.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
@@ -39,16 +41,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<User> _user;
   FirebaseMessaging _messaging = FirebaseMessaging();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration.zero, () {
-      _user = LocalStorage().loadUserFromLocalStorage();
-    });
     registerNotification();
+    LocalNotificationServices.initializeNotification();
   }
 
   @override
@@ -57,6 +56,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider<LoginModel>(
           create: (context) => LoginModel(),
+        ),
+        ChangeNotifierProvider<QuizModel>(
+          create: (context) => QuizModel(),
         ),
         ChangeNotifierProvider<ChatModel>(
           create: (context) => ChatModel(),
@@ -84,7 +86,7 @@ class _MyAppState extends State<MyApp> {
             GlobalCupertinoLocalizations.delegate,
           ],
           navigatorKey: navigatorKey,
-          initialRoute: SignInScreen.routeName,
+          initialRoute: SplashScreen.routeName,
           routes: routes,
           onGenerateRoute: (settings) {
             switch (settings.name) {
@@ -101,17 +103,17 @@ class _MyAppState extends State<MyApp> {
               case '/otp':
                 return PageTransition(
                   child: SignUpScreen(),
-                  type: PageTransitionType.rightToLeftWithFade,
+                  type: PageTransitionType.leftToRightWithFade,
                   settings: settings,
-                  reverseDuration: Duration(milliseconds: 1000),
-                  duration: Duration(milliseconds: 1000),
+                  reverseDuration: Duration(milliseconds: 700),
+                  duration: Duration(milliseconds: 700),
                   curve: Curves.fastOutSlowIn,
                 );
                 break;
               case '/home':
                 return PageTransition(
                   child: HomeScreen(),
-                  type: PageTransitionType.rightToLeftWithFade,
+                  type: PageTransitionType.leftToRightJoined,
                   settings: settings,
                   reverseDuration: Duration(milliseconds: 700),
                   duration: Duration(milliseconds: 700),
@@ -141,7 +143,6 @@ class _MyAppState extends State<MyApp> {
   //Down below related to FCM service
   void registerNotification() async {
     AppNotification _notificationInfo;
-
     await Firebase.initializeApp();
 
     await _messaging.requestNotificationPermissions(

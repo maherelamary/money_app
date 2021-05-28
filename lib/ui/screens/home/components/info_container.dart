@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_app/ui/screens/home/components/count_down_timer.dart';
+import 'package:money_app/ui/screens/home/components/new_answer_interval.dart';
 import 'package:money_app/ui/widgets/time_over.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
@@ -34,7 +34,7 @@ class _InfoContainerState extends State<InfoContainer> {
                     "60",
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontFamily: 'Changa',
+                      fontFamily: 'Cairo',
                       color: ColorPalettes.appColor,
                     ),
                   ),
@@ -71,16 +71,11 @@ class _InfoContainerState extends State<InfoContainer> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: CountDownTimer(
-                    secondsRemaining: 120,
-                    whenTimeExpires: () {
+                  child: CountDownInterval(
+                    start: false,
+                    whenIntervalExpires: () {
                       Navigator.pushNamed(context, TimeIsOverScreen.routeName);
                     },
-                    countDownTimerStyle: TextStyle(
-                      fontSize: 18.0,
-                      fontFamily: 'Changa',
-                      color: ColorPalettes.appColor,
-                    ),
                   ),
                 ),
                 Row(

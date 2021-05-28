@@ -1,7 +1,9 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:money_app/core/services/local_notification_services.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/screens/sign_in/components/new_password.dart';
+import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 import 'package:money_app/ui/widgets/rounded_rect_input_decoration.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
@@ -20,8 +22,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   String countryCode = "";
   String phone = "";
   String otp = "";
+  String userId = "";
+  String recievedOtp = "";
   bool hasRequestCode = false;
-
   final List<String> errors = [];
 
   LoginModel loginModel = LoginModel();
@@ -30,11 +33,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //initializeNotification();
+    LocalNotificationServices.initializeNotification();
   }
 
   @override
   Widget build(BuildContext context) {
+    loginModel = Provider.of<LoginModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -51,7 +55,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Text(
                 "money app".toUpperCase(),
                 style: TextStyle(
-                    color: ColorPalettes.appAccentColor,
+                    color: ColorPalettes.appBorderColor,
                     fontFamily: 'Changa',
                     fontWeight: FontWeight.bold,
                     fontSize: 45.0),
@@ -60,7 +64,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Text(
                 "Proceed with phone number verification to continue password recovery",
                 style: TextStyle(
-                    color: ColorPalettes.appBorderColor,
+                    color: ColorPalettes.appAccentColor,
                     fontFamily: 'Cairo',
                     fontWeight: FontWeight.w300,
                     fontSize: 14.0),
@@ -91,66 +95,70 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         horizontal: 8.0,
                         vertical: 30.0,
                       ),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 3.0),
-                                    //width: 60.0,
-                                    child: CountryCodePicker(
-                                      showFlag: false,
-                                      showFlagDialog: true,
-                                      //alignLeft: true,
-                                      //showCountryOnly: true,
-                                      initialSelection: "YE",
-                                      emptySearchBuilder: (context) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Center(
-                                            child: Text(
-                                              "Search result: Country not included",
-                                              softWrap: true,
-                                              style: TextStyle(fontSize: 20.0),
-                                              textAlign: TextAlign.center,
-                                            ),
+                      child: loginModel.loading
+                          ? Center(child: CircularProgressIndicator())
+                          : Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 3.0),
+                                          //width: 60.0,
+                                          child: CountryCodePicker(
+                                            showFlag: false,
+                                            showFlagDialog: true,
+                                            //alignLeft: true,
+                                            //showCountryOnly: true,
+                                            initialSelection: "YE",
+                                            emptySearchBuilder: (context) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Search result: Country not included",
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                        fontSize: 20.0),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            onInit: (code) {
+                                              countryCode = code.toString();
+                                            },
+                                            onChanged: (code) {
+                                              print(code);
+                                              //reformattedCode = replaceCharAt(code.toString(), 0, "");
+                                              countryCode = code.toString();
+                                              //print(reformattedCode);
+                                            },
                                           ),
-                                        );
-                                      },
-                                      onInit: (code) {
-                                        countryCode = code.toString();
-                                      },
-                                      onChanged: (code) {
-                                        print(code);
-                                        //reformattedCode = replaceCharAt(code.toString(), 0, "");
-                                        countryCode = code.toString();
-                                        //print(reformattedCode);
-                                      },
-                                    ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 6.0),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          margin: EdgeInsets.only(bottom: 40.0),
+                                          height: 50.0,
+                                          child: _buildPhoneFormField(),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(width: 6.0),
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    margin: EdgeInsets.only(bottom: 40.0),
-                                    height: 50.0,
-                                    child: _buildPhoneFormField(),
-                                  ),
-                                ),
-                              ],
+                                  Visibility(
+                                      visible: hasRequestCode,
+                                      child: _buildOtpTextFormField()),
+                                ],
+                              ),
                             ),
-                            Visibility(
-                                visible: hasRequestCode,
-                                child: _buildOtpTextFormField()),
-                          ],
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -160,15 +168,29 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   if (_formKey.currentState.validate() && !hasRequestCode) {
                     //Loader
                     print('form valid');
-                    //TODO call api to send OTP.
                     setState(() {
                       hasRequestCode = true;
                     });
+                    loginModel
+                        .forgotPasswordByMobile(
+                            mobileWithCode: countryCode + phone)
+                        .then((arr) {
+                      print(arr[0]);
+                      print(arr[1]);
+                      LocalNotificationServices.showNotificationWithSound(
+                          body: arr[0]);
+                      setState(() {
+                        recievedOtp = arr[0];
+                        userId = arr[1];
+                      });
+                      print("recievedOtp ${recievedOtp}");
+                      print("userId ${userId}");
+                    });
                   } else if (_formKey.currentState.validate() &&
                       hasRequestCode) {
-                    //Verify
-                    //Route to newpassword screen
-                    showNewPasswordDialog(context);
+                    if (recievedOtp == otp) {
+                      showNewPasswordDialog(context);
+                    }
                   } else {
                     showAlertDialog(context);
                     print('form not valid');
@@ -203,6 +225,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget _buildPhoneFormField() => Container(
         child: TextFormField(
           keyboardType: TextInputType.phone,
+          initialValue: phone,
           onSaved: (value) {
             phone = value;
           },
@@ -327,20 +350,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   showNewPasswordDialog(BuildContext context) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      content: NewPasswordContainer(),
-      // actions: [
-      //   okButton,
-      // ],
+      insetPadding: EdgeInsets.all(15.0),
+      contentPadding: EdgeInsets.zero,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      elevation: 2.0,
+      backgroundColor: Colors.transparent,
+      content: NewPasswordContainer(
+        userId: int.parse(userId),
+        otp: recievedOtp,
+      ),
     );
     // show the dialog
     showDialog(

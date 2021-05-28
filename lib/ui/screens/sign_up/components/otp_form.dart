@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/UI/widgets/otp_input_decoration.dart';
+import 'package:money_app/core/services/local_notification_services.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
-import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/sizes.dart';
 import 'package:provider/provider.dart';
@@ -42,9 +42,7 @@ class _OtpFormState extends State<OtpForm> {
     pin4FocusNode = FocusNode();
     pin5FocusNode = FocusNode();
     pin6FocusNode = FocusNode();
-
-    //Warm up local_notification
-    //initializeNotification();
+    LocalNotificationServices.initializeNotification();
   }
 
   @override
@@ -301,7 +299,8 @@ class _OtpFormState extends State<OtpForm> {
                   var countryCode = loginModel.getProfile.mobileCountryCode;
                   var phone = countryCode.toString() + mobile.toString();
                   loginModel.resendOtpWithMobile(mobileWithCode: phone);
-                  showNotificationWithSound(body: loginModel.getProfile.otp);
+                  LocalNotificationServices.showNotificationWithSound(
+                      body: loginModel.getProfile.otp);
                 }
               } else {
                 print("time not ended yet");

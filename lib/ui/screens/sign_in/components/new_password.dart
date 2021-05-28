@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/screens/profile/edit_profile_screen.dart';
 import 'package:money_app/ui/widgets/rounded_rect_input_decoration.dart';
 import 'package:money_app/utils/color_palettes.dart';
 import 'package:money_app/utils/constants.dart';
 import 'package:money_app/utils/images_asset.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import 'package:provider/provider.dart';
 
 class NewPasswordContainer extends StatefulWidget {
-  NewPasswordContainer({Key key}) : super(key: key);
+  final int userId;
+  final String otp;
+  NewPasswordContainer({Key key, this.userId, this.otp}) : super(key: key);
   static String routeName = '/newPassword';
 
   @override
@@ -19,6 +23,7 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
   String password = "";
   String conformPass = "";
   final List<String> errors = [];
+  LoginModel loginModel;
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -36,25 +41,25 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
 
   @override
   Widget build(BuildContext context) {
+    loginModel = Provider.of<LoginModel>(context);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Colors.black.withOpacity(0.1),
+        color: Colors.black.withOpacity(0.8),
       ),
-      height: MediaQuery.of(context).size.height / 2.8,
-      width: MediaQuery.of(context).size.width - 30,
-      padding: EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
+      height: MediaQuery.of(context).size.height / 1.5,
+      width: MediaQuery.of(context).size.width - 5.0,
+      padding: EdgeInsets.all(8.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Crate New Password",
             style: TextStyle(
                 color: ColorPalettes.appBorderColor,
                 fontFamily: 'Cairo',
-                fontSize: 17.0),
-          ),
-          SizedBox(
-            height: 8.0,
+                fontSize: 18.0),
           ),
           Form(
             key: _forgetPassFormKey,
@@ -64,7 +69,14 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Text(AppLocalizations.of(context).passwordLabel),
+                      child: Text(
+                        AppLocalizations.of(context).passwordLabel,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "cairo",
+                          fontSize: 16.0,
+                        ),
+                      ),
                     ),
                     SizedBox(width: 6.0),
                     Expanded(
@@ -82,7 +94,13 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
                     Expanded(
                       flex: 1,
                       child: Text(
-                          AppLocalizations.of(context).conformPasswordLabel),
+                        AppLocalizations.of(context).conformPasswordLabel,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "cairo",
+                          fontSize: 16.0,
+                        ),
+                      ),
                     ),
                     SizedBox(width: 6.0),
                     Expanded(
@@ -97,14 +115,16 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
               ],
             ),
           ),
-          Spacer(),
           InkWell(
             onTap: () {
               if (_forgetPassFormKey.currentState.validate()) {
                 //Loader
                 print('form valid');
-                //TODO call api to send OTP.
-
+                loginModel.resetPasswordByMobile(
+                    userId: widget.userId,
+                    code: widget.otp,
+                    newPassword: password,
+                    conformPassword: password);
               } else {
                 showAlertDialog(context);
                 print('form not valid');
@@ -123,6 +143,7 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
 
   TextFormField buildPasswordFormField() => TextFormField(
         keyboardType: TextInputType.name,
+        style: TextStyle(color: Colors.white70),
         obscureText: true,
         onSaved: (newValue) => password = newValue,
         onChanged: (value) {
@@ -153,13 +174,15 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
           return null;
         },
         decoration: CustomRoundedRectInputDecoration(
-            labelText: AppLocalizations.of(context).phoneLabel,
-            isAlwaysBehavior: true,
-            suffixIcon: ImagesAsset.phoneIcon),
+          labelText: AppLocalizations.of(context).passwordLabel,
+          isAlwaysBehavior: true,
+          suffixIcon: ImagesAsset.passwordIcon,
+        ),
       );
 
   TextFormField buildConfirmPasswordFormField() => TextFormField(
         keyboardType: TextInputType.text,
+        style: TextStyle(color: Colors.white70),
         obscureText: true,
         onSaved: (newValue) => conformPass = newValue,
         onChanged: (value) {
@@ -181,9 +204,9 @@ class _NewPasswordContainerState extends State<NewPasswordContainer> {
           return null;
         },
         decoration: CustomRoundedRectInputDecoration(
-            labelText: AppLocalizations.of(context).phoneLabel,
+            labelText: AppLocalizations.of(context).conformPasswordLabel,
             isAlwaysBehavior: true,
-            suffixIcon: ImagesAsset.phoneIcon),
+            suffixIcon: ImagesAsset.passwordIcon),
       );
 
   showAlertDialog(BuildContext context) {

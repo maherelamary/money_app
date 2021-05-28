@@ -8,35 +8,22 @@ import 'package:provider/provider.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 
 class HomeHeader extends StatefulWidget {
-  HomeHeader({Key key}) : super(key: key);
+  final User user;
+  HomeHeader({Key key, this.user}) : super(key: key);
 
   @override
   _HomeHeaderState createState() => _HomeHeaderState();
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
-  LoginModel loginModel = LoginModel();
-  User user;
   @override
   void initState() {
     super.initState();
-    setState(() {
-      user = loginModel.getUser;
-      print("from init${user}");
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    loginModel = Provider.of<LoginModel>(context);
-    if (user == null) {
-      setState(() {
-        user = loginModel.getUser;
-        print("from build${user}");
-      });
-    }
-
-    return BuildHeader(user: user);
+    return BuildHeader(user: widget.user);
   }
 }
 
@@ -65,30 +52,35 @@ class BuildHeader extends StatelessWidget {
             ),
             //gradient: ColorPalettes.primaryGradientColor,
           ),
-          child: user != null
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Expanded(child: ProfileAvatar()),
-                    Expanded(
-                      child: Text(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 8.0,
+              ),
+              Expanded(child: ProfileAvatar()),
+              Expanded(
+                child: user != null
+                    ? Text(
                         user.profile.displayName,
                         style: TextStyle(
                           fontSize: 18.0,
                           fontFamily: 'Cairo',
                           color: Colors.white,
                         ),
+                      )
+                    : Text(
+                        "Unknown",
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontFamily: 'Cairo',
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              : Center(
-                  child: CircularProgressIndicator(),
-                ),
+              ),
+            ],
+          ),
         ),
         Positioned(
           bottom: -30.0,

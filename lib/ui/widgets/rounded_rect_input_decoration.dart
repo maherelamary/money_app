@@ -12,17 +12,19 @@ InputDecoration CustomRoundedRectInputDecoration({
       labelStyle: TextStyle(
         fontSize: 13.0,
         fontFamily: 'Cairo',
+        color: Colors.grey,
       ),
-      fillColor: Colors.black.withOpacity(0.1),
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.1),
       errorStyle: TextStyle(height: 0),
-      hintStyle: TextStyle(
-        fontSize: 13.0,
-        fontFamily: 'Cairo',
-      ),
+      hintStyle:
+          TextStyle(fontSize: 13.0, fontFamily: 'Cairo', color: Colors.white),
       floatingLabelBehavior: isAlwaysBehavior
           ? FloatingLabelBehavior.always
           : FloatingLabelBehavior.never,
-      suffixIcon: CustomSuffixIcon(suffixIcon: suffixIcon),
+      suffixIcon: CustomSuffixIcon(
+        suffixIcon: suffixIcon,
+      ),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 30.0,
         vertical: 15,
@@ -30,7 +32,7 @@ InputDecoration CustomRoundedRectInputDecoration({
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: ColorPalettes.textColor,
+          color: Colors.grey,
         ),
       ),
       errorBorder: OutlineInputBorder(
@@ -42,13 +44,13 @@ InputDecoration CustomRoundedRectInputDecoration({
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: ColorPalettes.textColor,
+          color: Colors.grey,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: ColorPalettes.textColor,
+          color: Colors.grey,
         ),
       ),
       focusedBorder: OutlineInputBorder(

@@ -11,6 +11,7 @@ import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   static String routeName = '/profile';
+  ProfileScreen({Key key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();

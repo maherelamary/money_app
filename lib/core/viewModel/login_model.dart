@@ -8,6 +8,7 @@ import 'package:money_app/core/services/authentication_services.dart';
 import 'package:money_app/main.dart';
 import 'package:money_app/ui/screens/home/home_screen.dart';
 import 'package:money_app/ui/screens/land_screen.dart';
+import 'package:money_app/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:money_app/ui/screens/sign_up/otp_screen.dart';
 
 class LoginModel extends ChangeNotifier {
@@ -84,6 +85,12 @@ class LoginModel extends ChangeNotifier {
 
   void setProfile(val) {
     _profile = val;
+    notifyListeners();
+  }
+
+  void setUser(val) {
+    _user = val;
+    print("setUser ${_user}");
     notifyListeners();
   }
 
@@ -243,9 +250,123 @@ class LoginModel extends ChangeNotifier {
     });
   }
 
-  void setUser(val) {
-    _user = val;
-    print(_user);
-    notifyListeners();
+  Future<List<String>> forgotPasswordByMobile({String mobileWithCode}) async {
+    // registerData.forEach((_, value) {
+    //   print("value ${value}");
+    // });
+    List<String> arr = [];
+    Map<String, dynamic> body = {"code": "", "mobile": mobileWithCode};
+    print(mobileWithCode);
+    setLoading(true);
+    await authenticationServices.forgotPasswordByMobile(body).then((response) {
+      //arr.clear();
+      _errorMessages.clear();
+      final data = json.decode(response.body);
+      print('data Retrieved ${data}');
+      if (data['success'] == true &&
+          data['errors'] == null &&
+          data['result'] != null) {
+        String userOtp = data['result']['otp'].toString();
+        String userId = data['result']['userId'].toString();
+        arr.add(userOtp);
+        arr.add(userId);
+        print("userOtp => ${userOtp}");
+        setLoading(false);
+      } else if (data['success'] == false && data['errors'] != null) {
+        _errorMessages.clear();
+        data['errors'].forEach((err) {
+          setLoading(false);
+          print(data['errors']);
+          print(err["description"]);
+          _errorMessages.add(err['description']);
+          Fluttertoast.showToast(
+            msg: _errorMessages.first,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.pink.shade400,
+            textColor: Colors.white,
+            fontSize: 15.0,
+          );
+        });
+        navigatorKey.currentState.pushNamed(SignInScreen.routeName);
+      } else {
+        setLoading(false);
+        Fluttertoast.showToast(
+          msg: "Failed to get verification code",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.pink.shade400,
+          textColor: Colors.white,
+          fontSize: 15.0,
+        );
+
+        navigatorKey.currentState.pushNamed(SignInScreen.routeName);
+      }
+    });
+    return arr;
+  }
+
+  resetPasswordByMobile({
+    String code,
+    int userId,
+    String newPassword,
+    String conformPassword,
+  }) async {
+    print("code ${code} ");
+    print(" userId: ${userId} ");
+    print("newPassword: ${newPassword}");
+    print("confirmPassword ${conformPassword}");
+    Map<String, dynamic> body = {
+      "code": code,
+      "userId": userId,
+      "newPassword": newPassword,
+      "confirmPassword": conformPassword
+    };
+    https: //moneyappapi.azurewebsites.net/api/v1/identity/resetpassword
+    setLoading(true);
+    await authenticationServices.resetNewPassword(body).then((response) {
+      final data = json.decode(response.body);
+      print('data Retrieved ${data}');
+      if (data['success'] == true &&
+          data['errors'] == null &&
+          data['result'] == null) {
+        Fluttertoast.showToast(
+          msg: "Password has been changed successfully",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.pink.shade400,
+          textColor: Colors.white,
+          fontSize: 15.0,
+        );
+        setLoading(false);
+        navigatorKey.currentState.pushNamed(SignInScreen.routeName);
+      } else if (data['success'] == false && data['errors'] != null) {
+        if (_errorMessages != null) _errorMessages.clear();
+        data['errors'].forEach((err) {
+          setLoading(false);
+          print(data['errors']);
+          print(err["description"]);
+          _errorMessages.add(err['description']);
+          Fluttertoast.showToast(
+            msg: _errorMessages.first,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            backgroundColor: Colors.pink.shade400,
+            textColor: Colors.white,
+            fontSize: 15.0,
+          );
+        });
+      } else {
+        setLoading(false);
+        Fluttertoast.showToast(
+          msg: "Failed to reset new password",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          backgroundColor: Colors.pink.shade400,
+          textColor: Colors.white,
+          fontSize: 15.0,
+        );
+      }
+    });
   }
 }

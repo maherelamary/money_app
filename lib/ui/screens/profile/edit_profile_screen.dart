@@ -1,11 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_app/core/model/user.dart';
 import 'package:money_app/core/viewModel/login_model.dart';
 import 'package:money_app/ui/screens/profile/components/app_bar.dart';
-import 'package:money_app/ui/widgets/custom_suffix_icon.dart';
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
 import 'package:money_app/ui/widgets/profileAvatar.dart';
 import 'package:money_app/ui/widgets/rounded_rect_input_decoration.dart';
@@ -88,6 +86,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Column(
         children: [
           ProfileAppBar(
+            toEdit: true,
             onChanged: (imgFile) {
               _imageFile = imgFile;
             },

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/core/model/answer.dart';
 
 class AnswerContainer extends StatefulWidget {
-  AnswerContainer({Key key}) : super(key: key);
+  final Answer answer;
+  AnswerContainer({Key key, this.answer}) : super(key: key);
 
   @override
   _AnswerContainerState createState() => _AnswerContainerState();
@@ -35,7 +37,7 @@ class _AnswerContainerState extends State<AnswerContainer> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Fahd9090",
+                    widget.answer.memberDisplayName,
                     style:
                         TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600),
                   ),
@@ -43,7 +45,7 @@ class _AnswerContainerState extends State<AnswerContainer> {
                     height: 4.0,
                   ),
                   Text(
-                    "19976",
+                    widget.answer.answer.toString(),
                     style: TextStyle(
                       fontSize: 11.0,
                       fontWeight: FontWeight.w500,
